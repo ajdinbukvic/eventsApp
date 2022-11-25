@@ -27,6 +27,9 @@ public class UserIn {
   @NotBlank(message = "Password confirm ne smije biti prazan")
   private String passwordConfirm;
 
+  public UserIn() {
+  }
+
   public UserIn(String firstName, String lastName, String email, String password, String passwordConfirm) {
     this.firstName = firstName;
     this.lastName = lastName;

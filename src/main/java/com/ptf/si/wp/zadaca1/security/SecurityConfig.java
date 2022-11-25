@@ -26,7 +26,9 @@ public class SecurityConfig {
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    return http.authorizeHttpRequests()
+    return http.csrf()
+        .disable()
+        .authorizeHttpRequests()
         .antMatchers("/h2-console/**").permitAll()
         .antMatchers("/register/**").permitAll()
         .antMatchers("/css/**", "/js/**").permitAll()
@@ -36,7 +38,9 @@ public class SecurityConfig {
             .loginPage("/login")
             .loginProcessingUrl("/login")
             .failureUrl("/login?error")
-            .defaultSuccessUrl("/", true)
+            .usernameParameter("username")
+            .passwordParameter("password")
+            .defaultSuccessUrl("/home", true)
             .permitAll())
         .logout(
             logout -> logout

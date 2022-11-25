@@ -11,7 +11,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="../static/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css" />
   </head>
 
   <body class="my-login-page">
@@ -41,16 +41,16 @@
                 <form
                   method="POST"
                   class="my-login-validation"
-                  novalidate=""
-                  action="./home.html"
+                  th:action="@{/login}"
+                  role="form"
                 >
                   <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="username">Email</label>
                     <input
-                      id="email"
+                      id="username"
                       type="email"
                       class="form-control"
-                      name="email"
+                      name="username"
                       value=""
                       required
                       autofocus
@@ -97,11 +97,11 @@
                   </div>
                   <div class="mt-4 text-center">
                     Nemate profil?
-                    <a href="./register.html">Registrujte se</a>
+                    <a th:href="@{/register}">Registrujte se</a>
                   </div>
                 </form>
                 <div class="mt-4 text-center">
-                  <a href="./home.html">Nastavite kao gost?</a>
+                  <a th:href="@{/home}">Nastavite kao gost?</a>
                 </div>
               </div>
             </div>
@@ -126,6 +126,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script src="js/my-login.js"></script>
+    <!-- <script src="js/my-login.js"></script> -->
   </body>
 </html>
