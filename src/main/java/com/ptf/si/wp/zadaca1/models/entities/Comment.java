@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+import com.ptf.si.wp.zadaca1.models.in.CommentIn;
+
 @Entity
 @Table(name = "comments")
 public class Comment {
@@ -55,7 +57,7 @@ public class Comment {
     this.date = date;
   }
 
-  public Boolean getHidden() {
+  public Boolean isHidden() {
     return hidden;
   }
 
@@ -82,12 +84,9 @@ public class Comment {
   public Comment() {
   }
 
-  public Comment(@Size(max = 1000) String text, Date date, Boolean hidden, User user, Event event) {
-    this.text = text;
-    this.date = date;
-    this.hidden = hidden;
-    this.user = user;
-    this.event = event;
+  public Comment(CommentIn commentIn) {
+    text = commentIn.getText();
+    date = commentIn.getDate();
   }
 
 }

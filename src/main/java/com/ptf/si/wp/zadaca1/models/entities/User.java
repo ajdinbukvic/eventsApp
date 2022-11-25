@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+import com.ptf.si.wp.zadaca1.models.in.UserIn;
+
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
@@ -89,7 +91,7 @@ public class User {
     this.password = password;
   }
 
-  public Boolean getBanned() {
+  public Boolean isBanned() {
     return banned;
   }
 
@@ -108,15 +110,11 @@ public class User {
   public User() {
   }
 
-  public User(@Size(max = 255) String firstName, @Size(max = 255) String lastName, @Size(max = 255) String email,
-      @Size(max = 255) String password, Boolean banned, List<Comment> comments, Set<Role> roles) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
-    this.banned = banned;
-    this.comments = comments;
-    this.roles = roles;
+  public User(UserIn userIn) {
+    firstName = userIn.getFirstName();
+    lastName = userIn.getLastName();
+    email = userIn.getEmail();
+    password = userIn.getPassword();
   }
 
 }

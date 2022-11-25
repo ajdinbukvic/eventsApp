@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+import com.ptf.si.wp.zadaca1.models.in.CategoryIn;
+
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -59,10 +61,9 @@ public class Category {
   public Category() {
   }
 
-  public Category(@Size(max = 255) String name, @Size(max = 500) String icon, List<Event> events) {
-    this.name = name;
-    this.icon = icon;
-    this.events = events;
+  public Category(CategoryIn categoryIn) {
+    name = categoryIn.getName();
+    icon = categoryIn.getIcon();
   }
 
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+import com.ptf.si.wp.zadaca1.models.in.LocationIn;
+
 @Entity
 @Table(name = "locations")
 public class Location {
@@ -71,12 +73,10 @@ public class Location {
   public Location() {
   }
 
-  public Location(@Size(max = 255) String name, @Size(max = 500) String image, @Size(max = 1000) String description,
-      List<Event> events) {
-    this.name = name;
-    this.image = image;
-    this.description = description;
-    this.events = events;
+  public Location(LocationIn locationIn) {
+    name = locationIn.getName();
+    image = locationIn.getImage();
+    description = locationIn.getDescription();
   }
 
 }

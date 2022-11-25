@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+import com.ptf.si.wp.zadaca1.models.in.EventIn;
+
 @Entity
 @Table(name = "events")
 public class Event {
@@ -91,7 +93,7 @@ public class Event {
     this.date = date;
   }
 
-  public Boolean getFinished() {
+  public Boolean isFinished() {
     return finished;
   }
 
@@ -118,15 +120,11 @@ public class Event {
   public Event() {
   }
 
-  public Event(@Size(max = 255) String name, @Size(max = 500) String image, @Size(max = 1000) String description,
-      Date date, Boolean finished, Location location, Category category) {
-    this.name = name;
-    this.image = image;
-    this.description = description;
-    this.date = date;
-    this.finished = finished;
-    this.location = location;
-    this.category = category;
+  public Event(EventIn eventIn) {
+    name = eventIn.getName();
+    image = eventIn.getImage();
+    description = eventIn.getDescription();
+    date = eventIn.getDate();
   }
 
 }
