@@ -1,7 +1,7 @@
 package com.ptf.si.wp.zadaca1.models.entities;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -41,7 +41,7 @@ public class User {
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
 
-  private Set<Role> roles;
+  private Collection<Role> roles;
 
   public List<Comment> getComments() {
     return comments;
@@ -99,11 +99,11 @@ public class User {
     this.banned = banned;
   }
 
-  public Set<Role> getRoles() {
+  public Collection<Role> getRoles() {
     return roles;
   }
 
-  public void setRoles(Set<Role> roles) {
+  public void setRoles(Collection<Role> roles) {
     this.roles = roles;
   }
 

@@ -1,6 +1,6 @@
 package com.ptf.si.wp.zadaca1.models.out;
 
-import java.util.Set;
+import java.util.Collection;
 
 import com.ptf.si.wp.zadaca1.models.entities.Role;
 import com.ptf.si.wp.zadaca1.models.entities.User;
@@ -11,7 +11,7 @@ public class UserOut {
   private String lastName;
   private String email;
   private Boolean banned;
-  private Set<Role> roles;
+  private Collection<Role> roles;
 
   public UserOut() {
   }
@@ -65,11 +65,11 @@ public class UserOut {
     this.banned = banned;
   }
 
-  public Set<Role> getRoles() {
+  public Collection<Role> getRoles() {
     return roles;
   }
 
-  public void setRoles(Set<Role> roles) {
+  public void setRoles(Collection<Role> roles) {
     this.roles = roles;
   }
 
