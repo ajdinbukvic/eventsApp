@@ -48,60 +48,72 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
               <h4 class="text-right">Izmjena korisničkih podataka</h4>
             </div>
-            <div class="row mt-2">
-              <div class="col-md-6">
-                <label class="labels">Ime</label
-                ><input
-                  type="text"
-                  class="form-control"
-                  placeholder=""
-                  value=""
-                />
+            <form
+              th:method="POST"
+              class=""
+              role="form"
+              th:action="@{/api/users/updatePassword/6}"
+              th:object="${userIn}"
+            >
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <label for="currentPassword">Trenutna lozinka</label>
+                  <input
+                    id="currentPassword"
+                    type="password"
+                    class="form-control"
+                    name="currentPassword"
+                    required
+                    data-eye
+                    th:field="*{currentPassword}"
+                  />
+                  <p
+                    th:errors="*{currentPassword}"
+                    class="text-danger"
+                    th:if="${#fields.hasErrors('currentPassword')}"
+                  ></p>
+                </div>
+                <div class="col-md-12">
+                  <label for="password">Nova lozinka</label>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    required
+                    data-eye
+                    th:field="*{password}"
+                  />
+                  <p
+                    th:errors="*{password}"
+                    class="text-danger"
+                    th:if="${#fields.hasErrors('password')}"
+                  ></p>
+                </div>
+                <div class="col-md-12">
+                  <label for="passwordConfirm">Potvrdite novu lozinku</label>
+                  <input
+                    id="passwordConfirm"
+                    type="password"
+                    class="form-control"
+                    name="passwordConfirm"
+                    required
+                    data-eye
+                    th:field="*{passwordConfirm}"
+                  />
+                  <p
+                    th:errors="*{passwordConfirm}"
+                    class="text-danger"
+                    th:if="${#fields.hasErrors('passwordConfirm')}"
+                  ></p>
+                </div>
               </div>
-              <div class="col-md-6">
-                <label class="labels">Prezime</label
-                ><input
-                  type="text"
-                  class="form-control"
-                  value=""
-                  placeholder=""
-                />
+              <div class="mt-5 text-center">
+                <button type="submit" class="btn btn-primary profile-button">
+                  Spremi promjene
+                </button>
               </div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-md-12">
-                <label class="labels">Email</label
-                ><input
-                  type="text"
-                  class="form-control"
-                  placeholder=""
-                  value=""
-                />
-              </div>
-              <div class="col-md-12">
-                <label class="labels">Lozinka</label
-                ><input
-                  type="password"
-                  class="form-control"
-                  placeholder=""
-                  value=""
-                />
-              </div>
-              <div class="col-md-12">
-                <label class="labels">Potvrdite lozinku</label
-                ><input
-                  type="password"
-                  class="form-control"
-                  placeholder=""
-                  value=""
-                />
-              </div>
-            </div>
-            <div class="mt-5 text-center">
-              <button class="btn btn-primary profile-button" type="button">
-                Spremi promjene
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

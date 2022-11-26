@@ -22,14 +22,28 @@
 
   <body>
     <div lang="en" th:include="fragments/navbar :: navbar"></div>
-    <div class="container my-4 d-flex justify-content-center">
+    <div
+      class="container my-4 d-flex justify-content-center align-items-center"
+    >
+      <form class="form-inline mr-5" target="_self">
+        <div class="form-group">
+          <label for="search-field"><i class="fa fa-search"></i></label
+          ><input
+            class="form-control search-field ml-2"
+            type="search"
+            name="search"
+            id="search-field"
+            placeholder="Pretraga po nazivu..."
+          />
+        </div>
+      </form>
       <div class="mr-5">
         <span class="mr-3">Pretraga po lokaciji:</span>
         <select class="form-select" aria-label="Default select example">
           <option selected>sve</option>
           <option value="1">One</option>
           <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="3">Threeeeeee</option>
         </select>
       </div>
       <div class="">
@@ -38,7 +52,7 @@
           <option selected>sve</option>
           <option value="1">One</option>
           <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="3">Threeeeeee</option>
         </select>
       </div>
     </div>

@@ -78,8 +78,11 @@
           >
         </div>
         <div sec:authorize="isAuthenticated()">
-          <span class="navbar-text">
+          <!-- <span class="navbar-text">
             <a th:href="@{/profile}" class="login">Profil</a></span
+          > -->
+          <span class="navbar-text">
+            <a th:href="@{|/profile/${id}|}" class="login">Profil</a></span
           >
           <a
             class="btn btn-light action-button ml-2"
