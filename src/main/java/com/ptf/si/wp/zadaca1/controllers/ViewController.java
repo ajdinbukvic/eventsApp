@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.ptf.si.wp.zadaca1.models.SecurityUser;
-//import com.ptf.si.wp.zadaca1.models.out.UserOut;
 
 @Controller
 public class ViewController {
@@ -15,5 +14,11 @@ public class ViewController {
   public String homePage(Model model, @AuthenticationPrincipal SecurityUser user) {
     model.addAttribute("user", user);
     return "home";
+  }
+
+  @GetMapping(value = "/profile")
+  public String profilePage(Model model, @AuthenticationPrincipal SecurityUser user) {
+    // model.addAttribute("user", user);
+    return "profile";
   }
 }

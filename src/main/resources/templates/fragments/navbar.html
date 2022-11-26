@@ -1,0 +1,94 @@
+<div th:fragment="navbar">
+  <div class="header-blue">
+    <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+      <div class="container">
+        <a class="navbar-brand" th:href="@{/home}">Događaji | Početna</a
+        ><button
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#navcol-1"
+        >
+          <span class="sr-only">Toggle navigation</span
+          ><span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+          <ul class="nav navbar-nav">
+            <div sec:authorize="isAuthenticated()">
+            <!-- <li class="nav-item" role="presentation">
+              <a class="nav-link active ml-4" href="./profil.html">Profil</a>
+            </li> -->
+            <div sec:authorize="hasRole('ADMIN')">
+            <li class="dropdown">
+              <a
+                class="dropdown-toggle nav-link dropdown-toggle"
+                data-toggle="dropdown"
+                aria-expanded="false"
+                href="#"
+                >Upravljanje
+              </a>
+              <div class="dropdown-menu" role="menu">
+                <a
+                  class="dropdown-item"
+                  role="presentation"
+                  href="./lokacija.html"
+                  >Lokacije</a
+                ><a
+                  class="dropdown-item"
+                  role="presentation"
+                  href="./kategorija.html"
+                  >Kategorije</a
+                ><a
+                  class="dropdown-item"
+                  role="presentation"
+                  href="./korisnik.html"
+                  >Korisnici</a
+                >
+                <a
+                  class="dropdown-item"
+                  role="presentation"
+                  href="./dogadjaj.html"
+                  >Događaji</a
+                >
+              </div>
+            </li>
+          </div>
+          </ul>
+        </div>
+          <!-- <form class="form-inline" target="_self">
+            <div class="form-group">
+              <label for="search-field"><i class="fa fa-search"></i></label
+              ><input
+                class="form-control search-field"
+                type="search"
+                name="search"
+                id="search-field"
+                placeholder="Pretraga po nazivu..."
+              />
+            </div>
+          </form> -->
+        <div sec:authorize="isAnonymous()">
+          <span class="navbar-text">
+            <a th:href="@{/login}" class="login">Prijava</a></span
+          >
+          <a
+            class="btn btn-light action-button ml-2"
+            role="button"
+            th:href="@{/register}"
+            >Registracija</a
+          >
+        </div>
+        <div sec:authorize="isAuthenticated()">
+          <span class="navbar-text">
+            <a th:href="@{/profile}" class="login">Profil</a></span
+          >
+          <a
+            class="btn btn-light action-button ml-2"
+            role="button"
+            th:href="@{/login?logout}"
+            >Odjava</a
+          >
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

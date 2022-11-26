@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <title>Događaji | Profil</title>
+  </head>
+  <body>
+    <div lang="en" th:include="fragments/navbar :: navbar"></div>
+
+    <div class="container rounded bg-white mt-5 mb-5">
+      <div class="row justify-content-center">
+        <div class="col-md-3">
+          <div
+            class="d-flex flex-column align-items-center text-center p-3 py-5"
+          >
+            <img
+              class="rounded-circle mt-5"
+              width="150px"
+              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+            /><span class="font-weight-bold">Ime Prezime</span
+            ><span class="text-black-50">test@mail.com.my</span><span> </span>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Izmjena korisničkih podataka</h4>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-6">
+                <label class="labels">Ime</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  value=""
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="labels">Prezime</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  value=""
+                  placeholder=""
+                />
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label class="labels">Email</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  value=""
+                />
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Lozinka</label
+                ><input
+                  type="password"
+                  class="form-control"
+                  placeholder=""
+                  value=""
+                />
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Potvrdite lozinku</label
+                ><input
+                  type="password"
+                  class="form-control"
+                  placeholder=""
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="mt-5 text-center">
+              <button class="btn btn-primary profile-button" type="button">
+                Spremi promjene
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

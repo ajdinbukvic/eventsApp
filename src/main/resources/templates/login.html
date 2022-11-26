@@ -17,6 +17,9 @@
   <body class="my-login-page">
     <section class="h-100">
       <div class="container h-100">
+        <h1 class="text-center p-4 text-light">
+          Aplikacija za praćenje lokalnih događaja
+        </h1>
         <div class="row justify-content-md-center h-100">
           <div class="card-wrapper">
             <div class="brand">
@@ -34,6 +37,22 @@
                   d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                 />
               </svg>
+            </div>
+            <div th:if="${param.error}">
+              <div class="alert alert-danger text-center">
+                Uneseni email ili lozinka nisu ispravni.
+              </div>
+            </div>
+            <div th:if="${param.logout}">
+              <div class="alert alert-success text-center">
+                Uspješno ste se odjavili sa svog profila.
+              </div>
+            </div>
+            <div th:if="${success} != null">
+              <div
+                class="alert alert-success text-center"
+                th:text="${success}"
+              ></div>
             </div>
             <div class="card fat">
               <div class="card-body">
