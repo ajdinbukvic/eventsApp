@@ -1,12 +1,22 @@
 package com.ptf.si.wp.zadaca1.models.in;
 
-import java.util.Date;
+//import java.sql.Date;
+//import java.sql.Date;
+//import java.time.LocalDate;
+
+//import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+//import org.springframework.format.annotation.DateTimeFormat;
+
 public class EventIn {
+
+  private Long id;
 
   @Size(max = 255)
   @NotBlank(message = "Naziv ne smije biti prazan")
@@ -21,7 +31,8 @@ public class EventIn {
   private String description;
 
   @NotNull
-  private Date date;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private String date;
 
   @NotNull
   private Long locationId;
@@ -29,13 +40,26 @@ public class EventIn {
   @NotNull
   private Long categoryId;
 
-  public EventIn(String name, String image, String description, Date date, Long locationId, Long categoryId) {
+  public EventIn() {
+  }
+
+  public EventIn(Long id, String name, String image, String description, String date, Long locationId,
+      Long categoryId) {
+    this.id = id;
     this.name = name;
     this.image = image;
     this.description = description;
     this.date = date;
     this.locationId = locationId;
     this.categoryId = categoryId;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -62,11 +86,11 @@ public class EventIn {
     this.description = description;
   }
 
-  public Date getDate() {
+  public String getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(String date) {
     this.date = date;
   }
 
@@ -84,6 +108,12 @@ public class EventIn {
 
   public void setCategoryId(Long categoryId) {
     this.categoryId = categoryId;
+  }
+
+  @Override
+  public String toString() {
+    return "EventIn [id=" + id + ", name=" + name + ", image=" + image + ", description=" + description + ", date="
+        + date + ", locationId=" + locationId + ", categoryId=" + categoryId + "]";
   }
 
 }

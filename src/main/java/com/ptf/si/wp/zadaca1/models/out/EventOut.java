@@ -1,6 +1,8 @@
 package com.ptf.si.wp.zadaca1.models.out;
 
-import java.util.Date;
+//import java.sql.Date;
+//import java.time.LocalDate;
+//import java.util.Date;
 
 import com.ptf.si.wp.zadaca1.models.entities.Event;
 
@@ -9,10 +11,12 @@ public class EventOut {
   private String name;
   private String image;
   private String description;
-  private Date date;
+  private String date;
   private Boolean finished;
   private Long categoryId;
+  private String categoryName;
   private Long locationId;
+  private String locationName;
 
   public EventOut() {
   }
@@ -25,7 +29,9 @@ public class EventOut {
     this.date = event.getDate();
     this.finished = event.isFinished();
     this.categoryId = event.getCategory().getId();
+    this.categoryName = event.getCategory().getName();
     this.locationId = event.getLocation().getId();
+    this.locationName = event.getLocation().getName();
   }
 
   public Long getId() {
@@ -60,11 +66,11 @@ public class EventOut {
     this.description = description;
   }
 
-  public Date getDate() {
+  public String getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(String date) {
     this.date = date;
   }
 
@@ -84,12 +90,28 @@ public class EventOut {
     this.categoryId = categoryId;
   }
 
+  public String getCategoryName() {
+    return categoryName;
+  }
+
+  public void setCategoryName(String categoryName) {
+    this.categoryName = categoryName;
+  }
+
   public Long getLocationId() {
     return locationId;
   }
 
   public void setLocationId(Long locationId) {
     this.locationId = locationId;
+  }
+
+  public String getLocationName() {
+    return locationName;
+  }
+
+  public void setLocationName(String locationName) {
+    this.locationName = locationName;
   }
 
 }

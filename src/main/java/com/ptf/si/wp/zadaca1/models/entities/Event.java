@@ -1,10 +1,17 @@
 package com.ptf.si.wp.zadaca1.models.entities;
 
-import java.util.Date;
+//import java.sql.Date;
+//import java.time.LocalDate;
+//import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
+//import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ptf.si.wp.zadaca1.models.in.EventIn;
 
@@ -29,17 +36,18 @@ public class Event {
   private String description;
 
   @Column(nullable = false)
-  private Date date;
+  @JsonFormat(pattern = "yyyy-MM-dd", shape = Shape.STRING)
+  private String date;
 
   @Column(nullable = false, columnDefinition = "tinyint(1) default 0")
   private Boolean finished;
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinColumn(nullable = false)
+  @JoinColumn(name = "location_id")
   private Location location;
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinColumn(nullable = false)
+  @JoinColumn(name = "category_id")
   private Category category;
 
   @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
@@ -85,11 +93,11 @@ public class Event {
     this.description = description;
   }
 
-  public Date getDate() {
+  public String getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(String date) {
     this.date = date;
   }
 
@@ -121,6 +129,7 @@ public class Event {
   }
 
   public Event(EventIn eventIn) {
+    id = eventIn.getId();
     name = eventIn.getName();
     image = eventIn.getImage();
     description = eventIn.getDescription();
