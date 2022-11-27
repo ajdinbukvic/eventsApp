@@ -5,6 +5,8 @@ import javax.validation.constraints.Size;
 
 public class LocationIn {
 
+  private Long id;
+
   @Size(max = 255)
   @NotBlank(message = "Naziv ne smije biti prazan")
   private String name;
@@ -17,10 +19,22 @@ public class LocationIn {
   @NotBlank(message = "Opis ne smije biti prazan")
   private String description;
 
-  public LocationIn(String name, String image, String description) {
+  public LocationIn() {
+  }
+
+  public LocationIn(Long id, String name, String image, String description) {
+    this.id = id;
     this.name = name;
     this.image = image;
     this.description = description;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {

@@ -2,7 +2,7 @@ package com.ptf.si.wp.zadaca1.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,34 +28,28 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
-  public CategoryOut addNewCategory(CategoryIn categoryIn) {
+  public void addNewCategory(CategoryIn categoryIn) {
     Category c;
     try {
       c = new Category(categoryIn);
       _categoryRepository.save(c);
-      return new CategoryOut(c);
     } catch (Exception e) {
 
     }
-    return null;
   }
 
   @Override
-  public CategoryOut updateCategory(Long id, CategoryIn categoryIn) {
-    Optional<Category> c = _categoryRepository.findById(id);
+  public void updateCategory(CategoryIn categoryIn) {
+    Category c = _categoryRepository.findById(categoryIn.getId()).get();
     try {
       if (c != null) {
         Category updatedCategory = new Category(categoryIn);
-        updatedCategory.setId(id);
         _categoryRepository.save(updatedCategory);
-        return new CategoryOut(updatedCategory);
       } else
         throw new IllegalArgumentException("Kategorija s tim ID-om ne postoji!");
     } catch (Exception e) {
 
     }
-    return null;
-
   }
 
 }

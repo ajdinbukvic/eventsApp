@@ -46,7 +46,9 @@ public class SecurityConfig {
             logout -> logout
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
+                .clearAuthentication(true)
                 .permitAll())
         .rememberMe()
         .key("security-remember-secret")

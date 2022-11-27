@@ -74,6 +74,7 @@ public class Location {
   }
 
   public Location(LocationIn locationIn) {
+    id = locationIn.getId();
     name = locationIn.getName();
     image = locationIn.getImage();
     description = locationIn.getDescription();

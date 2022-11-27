@@ -2,7 +2,7 @@ package com.ptf.si.wp.zadaca1.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,33 +28,28 @@ public class LocationServiceImpl implements LocationService {
   }
 
   @Override
-  public LocationOut addNewLocation(LocationIn locationIn) {
+  public void addNewLocation(LocationIn locationIn) {
     Location l;
     try {
       l = new Location(locationIn);
       _locationRepository.save(l);
-      return new LocationOut(l);
     } catch (Exception e) {
 
     }
-    return null;
   }
 
   @Override
-  public LocationOut updateLocation(Long id, LocationIn locationIn) {
-    Optional<Location> l = _locationRepository.findById(id);
+  public void updateLocation(LocationIn locationIn) {
+    Location l = _locationRepository.findById(locationIn.getId()).get();
     try {
       if (l != null) {
         Location updatedLocation = new Location(locationIn);
-        updatedLocation.setId(id);
         _locationRepository.save(updatedLocation);
-        return new LocationOut(updatedLocation);
       } else
         throw new IllegalArgumentException("Lokacija s tim ID-om ne postoji!");
     } catch (Exception e) {
 
     }
-    return null;
   }
 
 }

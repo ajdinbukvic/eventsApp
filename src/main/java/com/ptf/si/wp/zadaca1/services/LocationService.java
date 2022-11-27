@@ -12,7 +12,7 @@ public interface LocationService {
 
   public List<LocationOut> getAllLocations();
 
-  public LocationOut addNewLocation(LocationIn locationIn);
+  public void addNewLocation(LocationIn locationIn);
 
-  public LocationOut updateLocation(Long id, LocationIn locationIn);
+  public void updateLocation(LocationIn locationIn);
 }

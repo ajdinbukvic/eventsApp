@@ -12,7 +12,7 @@ public interface CategoryService {
 
   public List<CategoryOut> getAllCategories();
 
-  public CategoryOut addNewCategory(CategoryIn categoryIn);
+  public void addNewCategory(CategoryIn categoryIn);
 
-  public CategoryOut updateCategory(Long id, CategoryIn categoryIn);
+  public void updateCategory(CategoryIn categoryIn);
 }

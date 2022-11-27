@@ -62,6 +62,7 @@ public class Category {
   }
 
   public Category(CategoryIn categoryIn) {
+    id = categoryIn.getId();
     name = categoryIn.getName();
     icon = categoryIn.getIcon();
   }
