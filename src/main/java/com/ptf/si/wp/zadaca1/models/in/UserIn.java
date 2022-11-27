@@ -27,10 +27,6 @@ public class UserIn {
   @NotBlank(message = "Password confirm ne smije biti prazan")
   private String passwordConfirm;
 
-  @Size(max = 255)
-  @NotBlank(message = "Trenutni password ne smije biti prazan")
-  private String currentPassword;
-
   public UserIn() {
   }
 
@@ -80,14 +76,6 @@ public class UserIn {
 
   public void setPasswordConfirm(String passwordConfirm) {
     this.passwordConfirm = passwordConfirm;
-  }
-
-  public String getCurrentPassword() {
-    return currentPassword;
-  }
-
-  public void setCurrentPassword(String currentPassword) {
-    this.currentPassword = currentPassword;
   }
 
   public boolean passwordEquals(String password, String passwordConfirm) {

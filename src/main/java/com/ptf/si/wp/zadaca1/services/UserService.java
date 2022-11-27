@@ -7,6 +7,7 @@ import java.util.List;
 import com.ptf.si.wp.zadaca1.models.SecurityUser;
 import com.ptf.si.wp.zadaca1.models.entities.User;
 import com.ptf.si.wp.zadaca1.models.in.UserIn;
+import com.ptf.si.wp.zadaca1.models.in.UserUpdateIn;
 import com.ptf.si.wp.zadaca1.models.out.UserOut;
 
 public interface UserService {
@@ -17,8 +18,10 @@ public interface UserService {
 
   public List<UserOut> getAllUsers();
 
-  public void updatePassword(Long id, UserIn userIn);
+  public void updatePassword(Long id, UserUpdateIn userUpdateIn);
 
   public User getUserByEmail(String email);
+
+  public User getUserById(Long id);
 
 }

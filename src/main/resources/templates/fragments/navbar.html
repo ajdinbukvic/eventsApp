@@ -17,7 +17,7 @@
             <!-- <li class="nav-item" role="presentation">
               <a class="nav-link active ml-4" href="./profil.html">Profil</a>
             </li> -->
-            <div sec:authorize="hasRole('ADMIN')">
+            <div sec:authorize="hasAuthority('ADMIN')">
             <li class="dropdown">
               <a
                 class="dropdown-toggle nav-link dropdown-toggle"

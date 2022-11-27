@@ -12,7 +12,9 @@ import com.ptf.si.wp.zadaca1.models.SecurityUser;
 import com.ptf.si.wp.zadaca1.models.entities.Role;
 import com.ptf.si.wp.zadaca1.models.entities.User;
 import com.ptf.si.wp.zadaca1.models.in.UserIn;
+import com.ptf.si.wp.zadaca1.models.in.UserUpdateIn;
 import com.ptf.si.wp.zadaca1.models.out.UserOut;
+import com.ptf.si.wp.zadaca1.repositories.RoleRepository;
 import com.ptf.si.wp.zadaca1.repositories.UserRepository;
 import com.ptf.si.wp.zadaca1.services.UserService;
 
@@ -20,12 +22,15 @@ import com.ptf.si.wp.zadaca1.services.UserService;
 public class UserServiceImpl implements UserService {
 
   private final UserRepository _userRepository;
+  private final RoleRepository _roleRepository;
   private final PasswordEncoder passwordEncoder;
 
-  public UserServiceImpl(UserRepository _userRepository, PasswordEncoder passwordEncoder) {
+  public UserServiceImpl(UserRepository _userRepository, PasswordEncoder passwordEncoder,
+      RoleRepository _roleRepository) {
     super();
     this._userRepository = _userRepository;
     this.passwordEncoder = passwordEncoder;
+    this._roleRepository = _roleRepository;
   }
 
   @Override
@@ -38,8 +43,9 @@ public class UserServiceImpl implements UserService {
   public SecurityUser createProfile(UserIn userIn) {
     try {
       User u = new User(userIn);
+      Role r = _roleRepository.findByName("USER");
       u.setPassword(passwordEncoder.encode(userIn.getPassword()));
-      u.setRoles(Arrays.asList(new Role("ROLE_USER")));
+      u.setRoles(Arrays.asList(r));
       u.setBanned(false);
       _userRepository.save(u);
       return new SecurityUser(u);
@@ -58,13 +64,18 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void updatePassword(Long id, UserIn userIn) {
-    Optional<User> u = _userRepository.findById(id);
+  public void updatePassword(Long id, UserUpdateIn userUpdateIn) {
+    User u = _userRepository.findById(id).get();
     try {
       if (u != null) {
-        User updatedUser = new User(userIn);
+        User updatedUser = new User(userUpdateIn);
         updatedUser.setId(id);
-        updatedUser.setPassword(passwordEncoder.encode(userIn.getPassword()));
+        updatedUser.setPassword(passwordEncoder.encode(userUpdateIn.getPassword()));
+        updatedUser.setBanned(u.isBanned());
+        updatedUser.setEmail(u.getEmail());
+        updatedUser.setFirstName(u.getFirstName());
+        updatedUser.setLastName(u.getLastName());
+        updatedUser.setRoles(u.getRoles());
         _userRepository.save(updatedUser);
       } else
         throw new IllegalArgumentException("Korisnik s tim ID-om ne postoji!");
@@ -85,6 +96,12 @@ public class UserServiceImpl implements UserService {
     // user.setLastName(u.get().getLastName());
     // user.setId(u.get().getId());
     // user.setRoles(u.get().getRoles());
+    return user;
+  }
+
+  @Override
+  public User getUserById(Long id) {
+    User user = _userRepository.findById(id).get();
     return user;
   }
 

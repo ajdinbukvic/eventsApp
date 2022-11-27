@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import com.ptf.si.wp.zadaca1.models.in.UserIn;
+import com.ptf.si.wp.zadaca1.models.in.UserUpdateIn;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -115,6 +116,13 @@ public class User {
     lastName = userIn.getLastName();
     email = userIn.getEmail();
     password = userIn.getPassword();
+  }
+
+  public User(UserUpdateIn userUpdateIn) {
+    // firstName = userUpdateIn.getFirstName();
+    // lastName = userUpdateIn.getLastName();
+    // email = userUpdateIn.getEmail();
+    password = userUpdateIn.getPassword();
   }
 
 }
