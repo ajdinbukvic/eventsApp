@@ -58,10 +58,14 @@ public class ViewController {
     return "profile";
   }
 
-  @GetMapping(value = "/event")
-  public String eventPage(Model model, @AuthenticationPrincipal SecurityUser user) {
-    // model.addAttribute("user", user);
-    // event.findnyid...
+  @GetMapping(value = "/event/{id}")
+  public String eventPage(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal SecurityUser user) {
+    if (user != null) {
+      model.addAttribute("user", user);
+      User u = _userService.getUserByEmail(user.getUsername());
+      model.addAttribute("id", u.getId());
+    }
+    model.addAttribute("event", _eventService.getEventById(id));
     return "event";
   }
 

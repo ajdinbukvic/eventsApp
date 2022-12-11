@@ -30,7 +30,7 @@ public class SecurityConfig {
         .disable()
         .authorizeHttpRequests()
         .antMatchers("/h2-console/**").permitAll()
-        .antMatchers("/register/**", "/home").permitAll()
+        .antMatchers("/register/**", "/home/**", "/event/**").permitAll()
         .antMatchers("/css/**", "/js/**").permitAll()
         .anyRequest().authenticated()
         .and()

@@ -15,8 +15,11 @@ public class EventOut {
   private Boolean finished;
   private Long categoryId;
   private String categoryName;
+  private String categoryIcon;
   private Long locationId;
   private String locationName;
+  private String locationDescription;
+  private String locationImage;
 
   public EventOut() {
   }
@@ -30,8 +33,11 @@ public class EventOut {
     this.finished = event.isFinished();
     this.categoryId = event.getCategory().getId();
     this.categoryName = event.getCategory().getName();
+    this.categoryIcon = event.getCategory().getIcon();
     this.locationId = event.getLocation().getId();
     this.locationName = event.getLocation().getName();
+    this.locationDescription = event.getLocation().getDescription();
+    this.locationImage = event.getLocation().getImage();
   }
 
   public Long getId() {
@@ -98,6 +104,14 @@ public class EventOut {
     this.categoryName = categoryName;
   }
 
+  public String getCategoryIcon() {
+    return categoryIcon;
+  }
+
+  public void setCategoryIcon(String categoryIcon) {
+    this.categoryIcon = categoryIcon;
+  }
+
   public Long getLocationId() {
     return locationId;
   }
@@ -112,6 +126,22 @@ public class EventOut {
 
   public void setLocationName(String locationName) {
     this.locationName = locationName;
+  }
+
+  public String getLocationDescription() {
+    return locationDescription;
+  }
+
+  public void setLocationDescription(String locationDescription) {
+    this.locationDescription = locationDescription;
+  }
+
+  public String getLocationImage() {
+    return locationImage;
+  }
+
+  public void setLocationImage(String locationImage) {
+    this.locationImage = locationImage;
   }
 
 }

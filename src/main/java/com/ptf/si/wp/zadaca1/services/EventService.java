@@ -12,6 +12,10 @@ public interface EventService {
 
   public List<EventOut> getAllEvents();
 
+  public List<EventOut> getAllActiveEvents();
+
+  public EventOut getEventById(Long id);
+
   public void addNewEvent(EventIn eventIn);
 
   public void updateEvent(EventIn eventIn);

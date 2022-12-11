@@ -263,6 +263,13 @@
               </td>
               <td class="td-actions text-right">
                 <button
+                  th:if="${event.finished == false}"
+                  type="button"
+                  class="btn btn-danger btn-just-icon btn-sm"
+                >
+                  Završi
+                </button>
+                <button
                   type="button"
                   th:onclick="dodajModal([[${event.id}]],[[${event.name}]],[[${event.date}]],[[${event.description}]],[[${event.image}]],[[${event.locationId}]],[[${event.categoryId}]])"
                   class="btn btn-primary btn-just-icon btn-sm"
@@ -279,11 +286,17 @@
       </div>
     </div>
     <script>
+      date.min = new Date().toISOString().split("T")[0];
+      datum.min = new Date().toISOString().split("T")[0];
       const dodajModal = (a, b, c, d, e, f, g) => {
         const id = document.getElementById("id");
         id.value = a;
         document.getElementById("naziv").value = b;
-        document.getElementById("datum").value = c;
+        document.getElementById("datum").value = c
+          .split("/")
+          .reverse()
+          .join("-");
+        console.log(new Date(c.split("/").reverse().join("-")));
         document.getElementById("opis").value = d;
         document.getElementById("slika").value = e;
         document.getElementById("lokacija").value = f;

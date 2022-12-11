@@ -48,7 +48,7 @@ public class EventController {
 
   @PostMapping(value = "/update", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public String updateEvent(@ModelAttribute("eventIn") EventIn eventIn, Model model) {
-    System.out.println(eventIn);
+    //System.out.println(eventIn);
     _eventService.updateEvent(eventIn);
     model.addAttribute("success", "Uspješno ste uredili događaj (ID: " + eventIn.getId() + ")");
     model.addAttribute("events", _eventService.getAllEvents());

@@ -64,110 +64,31 @@
     <!-- CARDS -->
     <section class="light">
       <div class="container py-2">
-        <article class="postcard light blue">
+        <article class="postcard light blue" th:each="event: ${events}">
           <a class="postcard__img_link" href="#">
             <img
               class="postcard__img"
-              src="https://picsum.photos/1000/1000"
-              alt="Image Title"
+              th:src="${event.image}"
+              alt="${event.name}"
             />
           </a>
           <div class="postcard__text t-dark">
-            <h1 class="postcard__title blue"><a href="#">Naslov</a></h1>
+            <h1 class="postcard__title blue">
+              <a href="#" th:text="${event.name}"></a>
+            </h1>
             <div class="postcard__subtitle small">
-              <time datetime="2020-05-25 12:00:00">
-                <i class="fas fa-calendar-alt mr-2"></i>Datum
+              <time th:text="${event.date}">
+                <i class="fas fa-calendar-alt mr-2"></i>
               </time>
             </div>
             <div class="postcard__bar"></div>
-            <div class="postcard__preview-txt">Opis</div>
+            <div
+              class="postcard__preview-txt"
+              th:text="${event.description}"
+            ></div>
             <ul class="postcard__tagbox">
-              <li class="tag__item">
-                <a href="./odabranidogadjaj.html">Više informacija...</a>
-              </li>
               <li class="tag__item play blue">
-                <a href="./komentar.html">Komentari</a>
-              </li>
-            </ul>
-          </div>
-        </article>
-        <article class="postcard light blue">
-          <a class="postcard__img_link" href="#">
-            <img
-              class="postcard__img"
-              src="https://picsum.photos/501/500"
-              alt="Image Title"
-            />
-          </a>
-          <div class="postcard__text t-dark">
-            <h1 class="postcard__title blue"><a href="#">Naslov</a></h1>
-            <div class="postcard__subtitle small">
-              <time datetime="2020-05-25 12:00:00">
-                <i class="fas fa-calendar-alt mr-2"></i>Datum
-              </time>
-            </div>
-            <div class="postcard__bar"></div>
-            <div class="postcard__preview-txt">Opis</div>
-            <ul class="postcard__tagbox">
-              <li class="tag__item">
-                <a href="./odabranidogadjaj.html">Više informacija...</a>
-              </li>
-              <li class="tag__item play blue">
-                <a href="./komentar.html">Komentari</a>
-              </li>
-            </ul>
-          </div>
-        </article>
-        <article class="postcard light blue">
-          <a class="postcard__img_link" href="#">
-            <img
-              class="postcard__img"
-              src="https://picsum.photos/1000/1000"
-              alt="Image Title"
-            />
-          </a>
-          <div class="postcard__text t-dark">
-            <h1 class="postcard__title blue"><a href="#">Naslov</a></h1>
-            <div class="postcard__subtitle small">
-              <time datetime="2020-05-25 12:00:00">
-                <i class="fas fa-calendar-alt mr-2"></i>Datum
-              </time>
-            </div>
-            <div class="postcard__bar"></div>
-            <div class="postcard__preview-txt">Opis</div>
-            <ul class="postcard__tagbox">
-              <li class="tag__item">
-                <a href="./odabranidogadjaj.html">Više informacija...</a>
-              </li>
-              <li class="tag__item play blue">
-                <a href="./komentar.html">Komentari</a>
-              </li>
-            </ul>
-          </div>
-        </article>
-        <article class="postcard light blue">
-          <a class="postcard__img_link" href="#">
-            <img
-              class="postcard__img"
-              src="https://picsum.photos/501/500"
-              alt="Image Title"
-            />
-          </a>
-          <div class="postcard__text t-dark">
-            <h1 class="postcard__title blue"><a href="#">Naslov</a></h1>
-            <div class="postcard__subtitle small">
-              <time datetime="2020-05-25 12:00:00">
-                <i class="fas fa-calendar-alt mr-2"></i>Datum
-              </time>
-            </div>
-            <div class="postcard__bar"></div>
-            <div class="postcard__preview-txt">Opis</div>
-            <ul class="postcard__tagbox">
-              <li class="tag__item">
-                <a href="./odabranidogadjaj.html">Više informacija...</a>
-              </li>
-              <li class="tag__item play blue">
-                <a href="./komentar.html">Komentari</a>
+                <a th:href="@{|/event/${event.id}|}">Više informacija...</a>
               </li>
             </ul>
           </div>
