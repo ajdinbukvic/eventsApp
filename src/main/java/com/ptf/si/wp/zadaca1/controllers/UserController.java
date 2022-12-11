@@ -14,21 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.ptf.si.wp.zadaca1.models.entities.User;
-//import com.ptf.si.wp.zadaca1.models.in.userUpdateIn;
 import com.ptf.si.wp.zadaca1.models.in.UserUpdateIn;
 import com.ptf.si.wp.zadaca1.models.out.UserOut;
 import com.ptf.si.wp.zadaca1.services.UserService;
 
-// @RestController
 @Controller
 // @RequestMapping("/api/users")
 public class UserController {

@@ -1,13 +1,7 @@
 package com.ptf.si.wp.zadaca1.controllers;
 
-//import java.text.ParseException;
-//import java.text.SimpleDateFormat;
-//import java.time.LocalDate;
-//import java.time.format.DateTimeFormatter;
-//import java.util.Date;
-//import java.sql.Date;
+
 import java.util.List;
-//import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

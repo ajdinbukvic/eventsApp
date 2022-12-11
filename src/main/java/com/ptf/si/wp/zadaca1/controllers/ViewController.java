@@ -1,6 +1,5 @@
 package com.ptf.si.wp.zadaca1.controllers;
 
-//import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,14 +13,11 @@ import com.ptf.si.wp.zadaca1.models.entities.User;
 import com.ptf.si.wp.zadaca1.models.in.CategoryIn;
 import com.ptf.si.wp.zadaca1.models.in.EventIn;
 import com.ptf.si.wp.zadaca1.models.in.LocationIn;
-//import com.ptf.si.wp.zadaca1.models.in.UserIn;
 import com.ptf.si.wp.zadaca1.models.in.UserUpdateIn;
-//import com.ptf.si.wp.zadaca1.models.out.LocationOut;
 import com.ptf.si.wp.zadaca1.models.out.UserOut;
 import com.ptf.si.wp.zadaca1.services.CategoryService;
 import com.ptf.si.wp.zadaca1.services.EventService;
 import com.ptf.si.wp.zadaca1.services.LocationService;
-//import com.ptf.si.wp.zadaca1.models.out.UserOut;
 import com.ptf.si.wp.zadaca1.services.UserService;
 
 @Controller
