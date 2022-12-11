@@ -1,6 +1,9 @@
 package com.ptf.si.wp.zadaca1.controllers;
 
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -42,7 +45,7 @@ public class ViewController {
       User u = _userService.getUserByEmail(user.getUsername());
       model.addAttribute("id", u.getId());
     }
-    model.addAttribute("events", _eventService.getAllEvents());
+    model.addAttribute("events", _eventService.getAllActiveEvents());
     model.addAttribute("locations", _locationService.getAllLocations());
     model.addAttribute("categories", _categoryService.getAllCategories());
     return "home";
@@ -116,6 +119,16 @@ public class ViewController {
       model.addAttribute("events", _eventService.getAllEvents());
       model.addAttribute("locations", _locationService.getAllLocations());
       model.addAttribute("categories", _categoryService.getAllCategories());
+      SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+      SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+      String dateStr = null;
+      try {
+        dateStr = sdf2.format(sdf1.parse(LocalDate.now().toString()));
+      } 
+      catch(Exception ex) {
+
+      }
+      model.addAttribute("currentDate", dateStr);
     }
     return "event-manage";
   }

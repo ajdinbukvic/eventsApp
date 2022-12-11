@@ -1,6 +1,8 @@
 package com.ptf.si.wp.zadaca1.controllers;
 
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,6 +46,16 @@ public class EventController {
     model.addAttribute("events", _eventService.getAllEvents());
     model.addAttribute("locations", _locationService.getAllLocations());
     model.addAttribute("categories", _categoryService.getAllCategories());
+    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+    String dateStr = null;
+    try {
+      dateStr = sdf2.format(sdf1.parse(LocalDate.now().toString()));
+    } 
+    catch(Exception ex) {
+
+    }
+    model.addAttribute("currentDate", dateStr);
     return "event-manage";
   }
 
@@ -54,6 +67,36 @@ public class EventController {
     model.addAttribute("events", _eventService.getAllEvents());
     model.addAttribute("locations", _locationService.getAllLocations());
     model.addAttribute("categories", _categoryService.getAllCategories());
+    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+    String dateStr = null;
+    try {
+      dateStr = sdf2.format(sdf1.parse(LocalDate.now().toString()));
+    } 
+    catch(Exception ex) {
+
+    }
+    model.addAttribute("currentDate", dateStr);
+    return "event-manage";
+  }
+
+  @PostMapping(value = "/finish/{id}")
+  public String finishEvent(@PathVariable Long id, Model model) {
+    _eventService.finishEvent(id);
+    model.addAttribute("success", "Uspješno ste završili događaj (ID: " + id + ")");
+    model.addAttribute("events", _eventService.getAllEvents());
+    model.addAttribute("locations", _locationService.getAllLocations());
+    model.addAttribute("categories", _categoryService.getAllCategories());
+    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+    String dateStr = null;
+    try {
+      dateStr = sdf2.format(sdf1.parse(LocalDate.now().toString()));
+    } 
+    catch(Exception ex) {
+
+    }
+    model.addAttribute("currentDate", dateStr);
     return "event-manage";
   }
 

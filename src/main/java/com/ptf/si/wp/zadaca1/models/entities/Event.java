@@ -36,7 +36,7 @@ public class Event {
   private String description;
 
   @Column(nullable = false)
-  @JsonFormat(pattern = "yyyy-MM-dd", shape = Shape.STRING)
+  @JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING)
   private String date;
 
   @Column(nullable = false, columnDefinition = "tinyint(1) default 0")

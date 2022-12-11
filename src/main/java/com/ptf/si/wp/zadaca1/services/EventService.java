@@ -16,6 +16,8 @@ public interface EventService {
 
   public EventOut getEventById(Long id);
 
+  public void finishEvent(Long id);
+
   public void addNewEvent(EventIn eventIn);
 
   public void updateEvent(EventIn eventIn);

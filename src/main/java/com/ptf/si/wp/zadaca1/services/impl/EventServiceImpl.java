@@ -55,7 +55,7 @@ public class EventServiceImpl implements EventService {
       SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
       SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
       String stringDate = sdf2.format(sdf1.parse(eventIn.getDate()));
-      System.out.println(stringDate);
+      //System.out.println(stringDate);
       e.setDate(stringDate);
       _eventRepository.save(e);
     } catch (Exception ex) {
@@ -74,15 +74,16 @@ public class EventServiceImpl implements EventService {
         updatedEvent.setCategory(c);
         Location l = _locationRepository.findById(eventIn.getLocationId()).get();
         updatedEvent.setLocation(l);
-        updatedEvent.setFinished(false);
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
         String stringDate = sdf2.format(sdf1.parse(eventIn.getDate()));
-        System.out.println(stringDate);
+        //System.out.println(stringDate);
         updatedEvent.setDate(stringDate);
+        if(!updatedEvent.getDate().equals(e.getDate())) updatedEvent.setFinished(false);
+        else updatedEvent.setFinished(e.isFinished());
         _eventRepository.save(updatedEvent);
       } else
-        throw new IllegalArgumentException("Lokacija s tim ID-om ne postoji!");
+        throw new IllegalArgumentException("Event s tim ID-om ne postoji!");
     } catch (Exception ex) {
 
     }
@@ -101,8 +102,23 @@ public class EventServiceImpl implements EventService {
   @Override
   public EventOut getEventById(Long id) {
     Event e = _eventRepository.findById(id).get();
-    System.out.println(new EventOut(e));
     return new EventOut(e);
+  }
+
+  @Override
+  public void finishEvent(Long id) {
+    try {
+      Event e = _eventRepository.findById(id).get();
+      if (e != null) {
+        e.setFinished(true);
+        _eventRepository.save(e);
+      }
+      else throw new IllegalArgumentException("Event s tim ID-om ne postoji!");
+    } catch (Exception ex) {
+
+    }
+
+    
   }
 
 }
