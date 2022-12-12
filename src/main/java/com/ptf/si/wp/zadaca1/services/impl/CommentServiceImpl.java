@@ -59,5 +59,21 @@ public class CommentServiceImpl implements CommentService  {
     }
     
   }
+
+  @Override
+  public void removeComment(Long id) {
+    Comment c = null;
+    try {
+      c = _commentRepository.findById(id).get();
+      if (c != null) {
+        c.setHidden(true);
+        _commentRepository.save(c);
+      }
+      else throw new IllegalArgumentException("Komentar s tim ID-om ne postoji!");
+    } catch (Exception ex) {
+
+    }
+    
+  }
   
 }

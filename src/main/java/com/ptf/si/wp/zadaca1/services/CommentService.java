@@ -13,4 +13,6 @@ public interface CommentService {
   public List<CommentOut> getAllCommentsByEventId(Long id);
 
   public void postNewComment(CommentIn commentIn);
+
+  public void removeComment(Long id);
 }

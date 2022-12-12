@@ -32,4 +32,15 @@ public class CommentController {
     model.addAttribute("comments", _commentService.getAllCommentsByEventId(commentIn.getEventId()));
     return "event";
   }
+
+  @PostMapping(value = "/remove", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+  public String removeComment(@ModelAttribute("commentIn") CommentIn commentIn, Model model) {
+    _commentService.removeComment(commentIn.getId());
+    model.addAttribute("success", "Uspješno ste uklonili odabrani komentar!");
+    model.addAttribute("userId", commentIn.getUserId());
+    model.addAttribute("event", _eventService.getEventById(commentIn.getEventId()));
+    model.addAttribute("commentIn", commentIn);
+    model.addAttribute("comments", _commentService.getAllCommentsByEventId(commentIn.getEventId()));
+    return "event";
+  }
 }

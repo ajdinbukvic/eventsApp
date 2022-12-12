@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
@@ -24,6 +28,7 @@
     /> -->
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/event.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
     <title th:text="'Događaj |' + ' ' + ${event.name}"></title>
   </head>
   <body>
@@ -164,7 +169,7 @@
       </div>
     </div>
 
-    <div class="row d-flex justify-content-center mt-100 mb-5 mt-4">
+    <div class="row d-flex justify-content-center mb-5 mt-4 mr-0">
       <div class="col-lg-6">
         <div class="card border-0">
           <div class="card-body text-center text-light">
@@ -173,7 +178,6 @@
             </h4>
           </div>
           <div class="comment-widgets">
-            <!-- Comment Row -->
             <div
               class="d-flex flex-row comment-row py-2 border"
               th:each="comment: ${comments}"
@@ -199,7 +203,10 @@
                   class="font-medium"
                   th:text="${comment.userFirstName} + ' ' + ${comment.userLastName}"
                 ></h6>
-                <span class="m-b-15 d-block mb-2" th:text="${comment.text}">
+                <span
+                  class="m-b-15 d-block mb-2 fst-italic"
+                  th:text="${comment.text}"
+                >
                 </span>
                 <div class="comment-footer">
                   <span
@@ -207,12 +214,36 @@
                     th:text="${comment.date}"
                   ></span>
                   <div sec:authorize="isAuthenticated()">
-                    <form th:if="${userId} == ${comment.userId}">
+                    <form
+                      th:if="${userId} == ${comment.userId}"
+                      method="POST"
+                      th:action="@{/comments/remove}"
+                      th:object="${commentIn}"
+                    >
+                      <input type="hidden" th:value="${comment.id}" name="id" />
+                      <input type="hidden" th:value="${userId}" name="userId" />
+                      <input
+                        type="hidden"
+                        th:value="${event.id}"
+                        name="eventId"
+                      />
                       <button type="submit" class="btn btn-danger btn-sm">
                         Ukloni
                       </button>
                     </form>
-                    <form sec:authorize="hasAuthority('ADMIN')">
+                    <form
+                      sec:authorize="hasAuthority('ADMIN')"
+                      method="POST"
+                      th:action="@{/comments/remove}"
+                      th:object="${commentIn}"
+                    >
+                      <input type="hidden" th:value="${comment.id}" name="id" />
+                      <input type="hidden" th:value="${userId}" name="userId" />
+                      <input
+                        type="hidden"
+                        th:value="${event.id}"
+                        name="eventId"
+                      />
                       <button type="submit" class="btn btn-danger btn-sm">
                         Ukloni
                       </button>
@@ -222,10 +253,10 @@
               </div>
             </div>
           </div>
-          <!-- Card -->
         </div>
       </div>
     </div>
+    <div lang="en" th:include="fragments/footer :: footer"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script

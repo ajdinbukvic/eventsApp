@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 
 public class CommentIn {
 
+  private Long id;
+  
   @Size(max = 1000)
   @NotBlank(message = "Tekst ne smije biti prazan")
   private String text;
@@ -21,7 +23,8 @@ public class CommentIn {
 
   }
 
-  public CommentIn(String text, Long userId, Long eventId) {
+  public CommentIn(Long id, String text, Long userId, Long eventId) {
+    this.id = id;
     this.text = text;
     this.userId = userId;
     this.eventId = eventId;
@@ -49,6 +52,14 @@ public class CommentIn {
 
   public void setEventId(Long eventId) {
     this.eventId = eventId;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
 }
