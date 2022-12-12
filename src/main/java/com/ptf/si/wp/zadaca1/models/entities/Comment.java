@@ -1,10 +1,10 @@
 package com.ptf.si.wp.zadaca1.models.entities;
 
-import java.util.Date;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.ptf.si.wp.zadaca1.models.in.CommentIn;
 
 @Entity
@@ -20,7 +20,8 @@ public class Comment {
   private String text;
 
   @Column(nullable = false)
-  private Date date;
+  @JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING)
+  private String date;
 
   @Column(nullable = false, columnDefinition = "tinyint(1) default 0")
   private Boolean hidden;
@@ -49,11 +50,11 @@ public class Comment {
     this.text = text;
   }
 
-  public Date getDate() {
+  public String getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(String date) {
     this.date = date;
   }
 
@@ -86,7 +87,6 @@ public class Comment {
 
   public Comment(CommentIn commentIn) {
     text = commentIn.getText();
-    date = commentIn.getDate();
   }
 
 }

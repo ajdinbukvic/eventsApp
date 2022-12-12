@@ -51,7 +51,7 @@ public class EventServiceImpl implements EventService {
       Location l = _locationRepository.findById(eventIn.getLocationId()).get();
       e.setLocation(l);
       e.setFinished(false);
-      System.out.println(eventIn.getDate());
+      //System.out.println(eventIn.getDate());
       SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
       SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
       String stringDate = sdf2.format(sdf1.parse(eventIn.getDate()));

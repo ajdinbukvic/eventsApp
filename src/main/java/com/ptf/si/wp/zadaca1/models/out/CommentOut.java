@@ -1,15 +1,15 @@
 package com.ptf.si.wp.zadaca1.models.out;
 
-import java.util.Date;
-
 import com.ptf.si.wp.zadaca1.models.entities.Comment;
 
 public class CommentOut {
   private Long id;
   private String text;
-  private Date date;
+  private String date;
   private Boolean hidden;
   private Long userId;
+  private String userFirstName;
+  private String userLastName;
   private Long eventId;
 
   public CommentOut() {
@@ -21,6 +21,8 @@ public class CommentOut {
     this.date = comment.getDate();
     this.hidden = comment.isHidden();
     this.userId = comment.getUser().getId();
+    this.userFirstName = comment.getUser().getFirstName();
+    this.userLastName = comment.getUser().getLastName();
     this.eventId = comment.getEvent().getId();
   }
 
@@ -40,11 +42,11 @@ public class CommentOut {
     this.text = text;
   }
 
-  public Date getDate() {
+  public String getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(String date) {
     this.date = date;
   }
 
@@ -62,6 +64,22 @@ public class CommentOut {
 
   public void setUserId(Long userId) {
     this.userId = userId;
+  }
+
+  public String getUserFirstName() {
+    return userFirstName;
+  }
+
+  public void setUserFirstName(String userFirstName) {
+    this.userFirstName = userFirstName;
+  }
+
+  public String getUserLastName() {
+    return userLastName;
+  }
+
+  public void setUserLastName(String userLastName) {
+    this.userLastName = userLastName;
   }
 
   public Long getEventId() {

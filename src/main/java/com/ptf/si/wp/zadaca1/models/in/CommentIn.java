@@ -1,6 +1,5 @@
 package com.ptf.si.wp.zadaca1.models.in;
 
-import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,17 +12,17 @@ public class CommentIn {
   private String text;
 
   @NotNull
-  private Date date;
-
-  @NotNull
   private Long userId;
 
   @NotNull
   private Long eventId;
 
-  public CommentIn(String text, Date date, Long userId, Long eventId) {
+  public CommentIn() {
+
+  }
+
+  public CommentIn(String text, Long userId, Long eventId) {
     this.text = text;
-    this.date = date;
     this.userId = userId;
     this.eventId = eventId;
   }
@@ -34,14 +33,6 @@ public class CommentIn {
 
   public void setText(String text) {
     this.text = text;
-  }
-
-  public Date getDate() {
-    return date;
-  }
-
-  public void setDate(Date date) {
-    this.date = date;
   }
 
   public Long getUserId() {
