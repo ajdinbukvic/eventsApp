@@ -27,6 +27,9 @@
     <h1 class="text-center mx-auto mt-4 text-primary">
       ADMIN | Upravljanje korisnicima
     </h1>
+    <div th:if="${success} != null">
+      <div class="alert alert-success text-center" th:text="${success}"></div>
+    </div>
     <div class="container">
       <div class="mt-4">
         <div
@@ -35,145 +38,47 @@
           <!-- Basic Plan -->
           <div
             class="row align-items-center justify-content-center border-bottom border-primary"
+            th:each="user: ${users}"
           >
             <div class="col-12 col-md-4">
-              <h4 class="pt-3 text-120 text-600 text-primary-d1 letter-spacing">
-                Ime Prezime
-              </h4>
+              <h4
+                class="pt-3 text-120 text-600 text-primary-d1 letter-spacing"
+                th:text="${user.firstName} + ' ' + ${user.lastName}"
+              ></h4>
 
               <div class="text-secondary-d1 text-100">
                 <span class="ml-n15 align-text-bottom"></span>
-                <span class="text-110">test@email.com</span>
-                <p class="text-100">ID: 1</p>
+                <span class="text-110" th:text="${user.email}"></span>
+                <p>ID: <span class="text-100" th:text="${user.id}"></span></p>
               </div>
             </div>
-
-            <div class="col-12 col-md-4 text-center">
-              <a
-                href="#"
-                class="f-n-hover btn btn-danger btn-raised px-2 py-10 w-50 text-600"
-                >Banuj</a
+            <div class="col-12 col-md-4 text-center" th:switch="${user.banned}">
+              <form
+                th:case="true"
+                style="display: inline"
+                method="POST"
+                th:action="@{|/users/update/${user.id}|}"
               >
-            </div>
-          </div>
-          <!-- Basic Plan -->
-          <div
-            class="row align-items-center justify-content-center border-bottom border-primary"
-          >
-            <div class="col-12 col-md-4">
-              <h4 class="pt-3 text-120 text-600 text-primary-d1 letter-spacing">
-                Ime Prezime
-              </h4>
-
-              <div class="text-secondary-d1 text-100">
-                <span class="ml-n15 align-text-bottom"></span>
-                <span class="text-110">test@email.com</span>
-                <p class="text-100">ID: 1</p>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-4 text-center">
-              <a
-                href="#"
-                class="f-n-hover btn btn-danger btn-raised px-2 py-10 w-50 text-600"
-                >Banuj</a
+                <button
+                  type="submit"
+                  class="f-n-hover btn btn-success btn-raised px-2 py-10 w-50 text-600"
+                >
+                  Unbanuj
+                </button>
+              </form>
+              <form
+                th:case="false"
+                style="display: inline"
+                method="POST"
+                th:action="@{|/users/update/${user.id}|}"
               >
-            </div>
-          </div>
-          <!-- Basic Plan -->
-          <div
-            class="row align-items-center justify-content-center border-bottom border-primary"
-          >
-            <div class="col-12 col-md-4">
-              <h4 class="pt-3 text-120 text-600 text-primary-d1 letter-spacing">
-                Ime Prezime
-              </h4>
-
-              <div class="text-secondary-d1 text-100">
-                <span class="ml-n15 align-text-bottom"></span>
-                <span class="text-110">test@email.com</span>
-                <p class="text-100">ID: 1</p>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-4 text-center">
-              <a
-                href="#"
-                class="f-n-hover btn btn-danger btn-raised px-2 py-10 w-50 text-600"
-                >Banuj</a
-              >
-            </div>
-          </div>
-          <!-- Basic Plan -->
-          <div
-            class="row align-items-center justify-content-center border-bottom border-primary"
-          >
-            <div class="col-12 col-md-4">
-              <h4 class="pt-3 text-120 text-600 text-primary-d1 letter-spacing">
-                Ime Prezime
-              </h4>
-
-              <div class="text-secondary-d1 text-100">
-                <span class="ml-n15 align-text-bottom"></span>
-                <span class="text-110">test@email.com</span>
-                <p class="text-100">ID: 1</p>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-4 text-center">
-              <a
-                href="#"
-                class="f-n-hover btn btn-danger btn-raised px-2 py-10 w-50 text-600"
-                >Banuj</a
-              >
-            </div>
-          </div>
-          <!-- Basic Plan -->
-          <div
-            class="row align-items-center justify-content-center border-bottom border-primary"
-          >
-            <div class="col-12 col-md-4">
-              <h4 class="pt-3 text-120 text-600 text-primary-d1 letter-spacing">
-                Ime Prezime
-              </h4>
-
-              <div class="text-secondary-d1 text-100">
-                <span class="ml-n15 align-text-bottom"></span>
-                <span class="text-110">test@email.com</span>
-                <p class="text-100">ID: 1</p>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-4 text-center">
-              <a
-                href="#"
-                class="f-n-hover btn btn-danger btn-raised px-2 py-10 w-50 text-600"
-                >Banuj</a
-              >
-            </div>
-          </div>
-          <!-- Basic Plan -->
-          <div
-            class="row align-items-center justify-content-center border-bottom border-primary"
-          >
-            <div class="col-12 col-md-4">
-              <h4 class="pt-3 text-120 text-600 text-primary-d1 letter-spacing">
-                Ime Prezime
-              </h4>
-
-              <div class="text-secondary-d1 text-100">
-                <span class="ml-n15 align-text-bottom"></span>
-                <span class="text-110">test@email.com</span>
-                <p class="text-100">ID: 1</p>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-4 text-center">
-              <a
-                href="#"
-                class="f-n-hover btn btn-danger btn-raised px-2 py-10 w-50 text-600"
-                >Banuj</a
-              >
+                <button
+                  type="submit"
+                  class="f-n-hover btn btn-danger btn-raised px-2 py-10 w-50 text-600"
+                >
+                  Banuj
+                </button>
+              </form>
             </div>
           </div>
         </div>

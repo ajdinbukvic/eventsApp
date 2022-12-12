@@ -44,6 +44,7 @@ public class SecurityUser implements UserDetails {
 
   @Override
   public boolean isAccountNonLocked() {
+    if(user.isBanned()) return false;
     return true;
   }
 

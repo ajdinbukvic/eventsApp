@@ -25,10 +25,10 @@
             <div class="brand">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="white"
+                fill="#21a9af"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="white"
+                stroke="#21a9af"
                 class="w-6 h-6"
               >
                 <path
@@ -38,11 +38,28 @@
                 />
               </svg>
             </div>
-            <div th:if="${param.error}">
+            <div
+              th:if="${param.error}"
+              th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+            >
+              <div
+                class="alert alert-danger text-center"
+                th:if="${errorMsg} == 'Bad credentials'"
+              >
+                Uneseni email ili lozinka nisu ispravni!
+              </div>
+              <div
+                class="alert alert-danger text-center"
+                th:if="${errorMsg} == 'User account is locked'"
+              >
+                Vaš profil je suspendovan od strane administratora!
+              </div>
+            </div>
+            <!-- <div th:if="${param.error}">
               <div class="alert alert-danger text-center">
                 Uneseni email ili lozinka nisu ispravni.
               </div>
-            </div>
+            </div> -->
             <div th:if="${param.logout}">
               <div class="alert alert-success text-center">
                 Uspješno ste se odjavili sa svog profila.

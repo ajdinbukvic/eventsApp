@@ -20,6 +20,8 @@ public interface UserService {
 
   public void updatePassword(Long id, UserUpdateIn userUpdateIn);
 
+  public boolean updateUserStatus(Long id);
+
   public User getUserByEmail(String email);
 
   public User getUserById(Long id);

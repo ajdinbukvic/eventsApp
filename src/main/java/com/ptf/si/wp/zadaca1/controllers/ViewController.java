@@ -104,6 +104,7 @@ public class ViewController {
       model.addAttribute("user", user);
       User u = _userService.getUserByEmail(user.getUsername());
       model.addAttribute("id", u.getId());
+      model.addAttribute("users", _userService.getAllUsers());
     }
     return "user-manage";
   }

@@ -61,7 +61,7 @@
               th:method="POST"
               class=""
               role="form"
-              th:action="@{/updatePassword/{id}(id=${userOut.id})}"
+              th:action="@{/users/updatePassword/{id}(id=${userOut.id})}"
               th:object="${userUpdateIn}"
             >
               <div class="row mt-3">

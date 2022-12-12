@@ -59,7 +59,10 @@ public class UserServiceImpl implements UserService {
   public List<UserOut> getAllUsers() {
     List<User> users = _userRepository.findAll();
     List<UserOut> usersOuts = new ArrayList<UserOut>();
-    users.forEach(u -> usersOuts.add(new UserOut(u)));
+    users.forEach(u -> {
+      System.out.println(u.getRoles());
+      if(u.getRoles().size() == 1) usersOuts.add(new UserOut(u));
+    });
     return usersOuts;
   }
 
@@ -103,6 +106,23 @@ public class UserServiceImpl implements UserService {
   public User getUserById(Long id) {
     User user = _userRepository.findById(id).get();
     return user;
+  }
+
+  @Override
+  public boolean updateUserStatus(Long id) {
+    User u = null;
+    try {
+      u = _userRepository.findById(id).get();
+      if (u != null) {
+        u.setBanned(!u.isBanned());
+        _userRepository.save(u);
+      }
+      else throw new IllegalArgumentException("Korisnik s tim ID-om ne postoji!");
+    } catch (Exception ex) {
+
+    }
+    return !u.isBanned();
+    
   }
 
 }

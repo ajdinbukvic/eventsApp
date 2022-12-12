@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.ptf.si.wp.zadaca1.models.entities.User;
 import com.ptf.si.wp.zadaca1.models.in.UserUpdateIn;
 import com.ptf.si.wp.zadaca1.models.out.UserOut;
 import com.ptf.si.wp.zadaca1.services.UserService;
 
 @Controller
-// @RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 
   @Autowired
@@ -66,5 +68,14 @@ public class UserController {
     model.addAttribute("userOut", userOut);
     return "profile";
     // return "redirect:home";
+  }
+
+  @PostMapping(value = "/update/{id}")
+  public String updateUserStatus(@PathVariable Long id, Model model) {
+    boolean status = _userService.updateUserStatus(id);
+    String message = status == false ? "banovali" : "unbanovali";
+    model.addAttribute("success", "Uspješno ste " + message + " korisnika (ID: " + id +")");
+    model.addAttribute("users", _userService.getAllUsers());
+    return "user-manage";
   }
 }
