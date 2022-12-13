@@ -32,8 +32,8 @@ public class CategoryServiceImpl implements CategoryService {
     try {
       c = new Category(categoryIn);
       _categoryRepository.save(c);
-    } catch (Exception e) {
-
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
     }
   }
 
@@ -46,8 +46,8 @@ public class CategoryServiceImpl implements CategoryService {
         _categoryRepository.save(updatedCategory);
       } else
         throw new IllegalArgumentException("Kategorija s tim ID-om ne postoji!");
-    } catch (Exception e) {
-
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
     }
   }
 

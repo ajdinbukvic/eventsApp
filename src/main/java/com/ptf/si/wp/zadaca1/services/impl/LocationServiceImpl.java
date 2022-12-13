@@ -32,8 +32,8 @@ public class LocationServiceImpl implements LocationService {
     try {
       l = new Location(locationIn);
       _locationRepository.save(l);
-    } catch (Exception e) {
-
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
     }
   }
 
@@ -46,8 +46,8 @@ public class LocationServiceImpl implements LocationService {
         _locationRepository.save(updatedLocation);
       } else
         throw new IllegalArgumentException("Lokacija s tim ID-om ne postoji!");
-    } catch (Exception e) {
-
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
     }
   }
 

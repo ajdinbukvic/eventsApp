@@ -29,6 +29,10 @@ public class SecurityConfig {
         .antMatchers("/h2-console/**").permitAll()
         .antMatchers("/register/**", "/home/**", "/event/**").permitAll()
         .antMatchers("/css/**", "/js/**").permitAll()
+        .antMatchers("/user-manage", "/event-manage", "/location-manage", "/category-manage").hasAuthority("ADMIN")
+        .antMatchers("/user-manage", "/event-manage", "/location-manage", "/category-manage").hasAuthority("ADMIN")
+        .antMatchers("/categories/**", "/locations/**", "/events/**", "/users/changestatus/**").hasAuthority("ADMIN")
+        .antMatchers("/profile/**", "/users/changepassword/**", "/comments/**").hasAuthority("USER")
         .anyRequest().authenticated()
         .and()
         .formLogin(form -> form

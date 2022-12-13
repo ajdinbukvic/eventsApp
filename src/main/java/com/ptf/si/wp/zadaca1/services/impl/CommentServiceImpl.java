@@ -52,8 +52,8 @@ public class CommentServiceImpl implements CommentService  {
       c.setDate(stringDate);
       c.setHidden(false);
       _commentRepository.save(c);
-    } catch (Exception e) {
-
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
     }
     
   }
@@ -69,7 +69,7 @@ public class CommentServiceImpl implements CommentService  {
       }
       else throw new IllegalArgumentException("Komentar s tim ID-om ne postoji!");
     } catch (Exception ex) {
-
+      System.out.println(ex.getMessage());
     }
     
   }

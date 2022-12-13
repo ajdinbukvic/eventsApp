@@ -53,7 +53,7 @@ public class EventServiceImpl implements EventService {
       e.setDate(stringDate);
       _eventRepository.save(e);
     } catch (Exception ex) {
-
+      System.out.println(ex.getMessage());
     }
   }
 
@@ -77,7 +77,7 @@ public class EventServiceImpl implements EventService {
       } else
         throw new IllegalArgumentException("Event s tim ID-om ne postoji!");
     } catch (Exception ex) {
-
+      System.out.println(ex.getMessage());
     }
 
   }
@@ -106,7 +106,7 @@ public class EventServiceImpl implements EventService {
       }
       else throw new IllegalArgumentException("Event s tim ID-om ne postoji!");
     } catch (Exception ex) {
-
+      System.out.println(ex.getMessage());
     }
 
     

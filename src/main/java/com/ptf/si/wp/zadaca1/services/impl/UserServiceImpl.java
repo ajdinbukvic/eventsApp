@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
       u.setBanned(false);
       _userRepository.save(u);
       return new SecurityUser(u);
-    } catch (Exception e) {
-
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
     }
     return null;
   }
@@ -72,8 +72,8 @@ public class UserServiceImpl implements UserService {
         _userRepository.save(u);
       } 
       else throw new IllegalArgumentException("Korisnik s tim ID-om ne postoji!");
-    } catch (Exception e) {
-
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
     }
   }
 
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
       }
       else throw new IllegalArgumentException("Korisnik s tim ID-om ne postoji!");
     } catch (Exception ex) {
-
+      System.out.println(ex.getMessage());
     }
 
     return !u.isBanned(); 
