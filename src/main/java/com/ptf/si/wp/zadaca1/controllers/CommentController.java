@@ -1,5 +1,6 @@
 package com.ptf.si.wp.zadaca1.controllers;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class CommentController {
   private EventService _eventService;
   
   @PostMapping(value = "/post", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String addNewEvent(@ModelAttribute("commentIn") CommentIn commentIn, Model model) {
+  public String addNewComment(@ModelAttribute("commentIn") CommentIn commentIn, Model model) {
     _commentService.postNewComment(commentIn);
     model.addAttribute("success", "Uspješno ste dodali novi komentar!");
     model.addAttribute("userId", commentIn.getUserId());

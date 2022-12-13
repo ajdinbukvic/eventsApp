@@ -1,8 +1,5 @@
 package com.ptf.si.wp.zadaca1.models.out;
 
-//import java.sql.Date;
-//import java.time.LocalDate;
-//import java.util.Date;
 
 import com.ptf.si.wp.zadaca1.models.entities.Event;
 

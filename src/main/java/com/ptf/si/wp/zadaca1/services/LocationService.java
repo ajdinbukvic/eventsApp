@@ -15,4 +15,5 @@ public interface LocationService {
   public void addNewLocation(LocationIn locationIn);
 
   public void updateLocation(LocationIn locationIn);
+  
 }

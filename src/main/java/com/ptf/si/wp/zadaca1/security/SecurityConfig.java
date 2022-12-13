@@ -1,5 +1,6 @@
 package com.ptf.si.wp.zadaca1.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -10,19 +11,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.ptf.si.wp.zadaca1.services.CustomUserDetailsService;
+import com.ptf.si.wp.zadaca1.services.impl.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
 
-  private final CustomUserDetailsService _customUserDetailsService;
-
-  public SecurityConfig(CustomUserDetailsService _customUserDetailsService) {
-    super();
-    this._customUserDetailsService = _customUserDetailsService;
-  }
+  @Autowired
+  private UserDetailsServiceImpl _customUserDetailsService;
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

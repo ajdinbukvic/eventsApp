@@ -14,18 +14,18 @@ public interface EventService {
 
   public List<EventOut> getAllActiveEvents();
 
-  public EventOut getEventById(Long id);
-
   public List<EventOut> getAllEventsByName(String name);
-
+  
   public List<EventOut> getAllEventsByLocationId(Long id);
-
+  
   public List<EventOut> getAllEventsByCategoryId(Long id);
 
-  public void finishEvent(Long id);
+  public EventOut getEventById(Long id);
 
   public void addNewEvent(EventIn eventIn);
-
+  
   public void updateEvent(EventIn eventIn);
+
+  public void finishEvent(Long id);
 
 }

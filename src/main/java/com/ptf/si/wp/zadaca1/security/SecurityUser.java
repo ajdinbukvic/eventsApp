@@ -1,4 +1,4 @@
-package com.ptf.si.wp.zadaca1.models;
+package com.ptf.si.wp.zadaca1.security;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

@@ -9,4 +9,5 @@ import com.ptf.si.wp.zadaca1.models.entities.Role;
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
   public Role findByName(String name);
+  
 }

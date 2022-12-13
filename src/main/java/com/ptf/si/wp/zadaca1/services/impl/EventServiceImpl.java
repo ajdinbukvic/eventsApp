@@ -1,7 +1,6 @@
 package com.ptf.si.wp.zadaca1.services.impl;
 
 import java.text.SimpleDateFormat;
-//import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +34,6 @@ public class EventServiceImpl implements EventService {
     List<Event> events = _eventRepository.findAll();
     List<EventOut> eventsOuts = new ArrayList<EventOut>();
     events.forEach(e -> eventsOuts.add(new EventOut(e)));
-    //SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy");
-    eventsOuts.forEach(e -> e.setDate((e.getDate().split(" ")[0])));
-    //eventsOuts.forEach(e -> e.setDate(pattern.format(e.getDate())));
     return eventsOuts;
   }
 
@@ -51,11 +47,9 @@ public class EventServiceImpl implements EventService {
       Location l = _locationRepository.findById(eventIn.getLocationId()).get();
       e.setLocation(l);
       e.setFinished(false);
-      //System.out.println(eventIn.getDate());
       SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
       SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
       String stringDate = sdf2.format(sdf1.parse(eventIn.getDate()));
-      //System.out.println(stringDate);
       e.setDate(stringDate);
       _eventRepository.save(e);
     } catch (Exception ex) {
@@ -70,14 +64,12 @@ public class EventServiceImpl implements EventService {
       if (e != null) {
         Event updatedEvent = new Event(eventIn);
         Category c = _categoryRepository.findById(eventIn.getCategoryId()).get();
-        //System.out.println(c.getName());
         updatedEvent.setCategory(c);
         Location l = _locationRepository.findById(eventIn.getLocationId()).get();
         updatedEvent.setLocation(l);
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
         String stringDate = sdf2.format(sdf1.parse(eventIn.getDate()));
-        //System.out.println(stringDate);
         updatedEvent.setDate(stringDate);
         if(!updatedEvent.getDate().equals(e.getDate())) updatedEvent.setFinished(false);
         else updatedEvent.setFinished(e.isFinished());
@@ -95,7 +87,6 @@ public class EventServiceImpl implements EventService {
     List<Event> events = _eventRepository.findAllActiveEvents();
     List<EventOut> eventsOuts = new ArrayList<EventOut>();
     events.forEach(e -> eventsOuts.add(new EventOut(e)));
-    eventsOuts.forEach(e -> e.setDate((e.getDate().split(" ")[0])));
     return eventsOuts;
   }
 
@@ -126,7 +117,6 @@ public class EventServiceImpl implements EventService {
     List<Event> events = _eventRepository.findByNameContainingIgnoreCase(name);
     List<EventOut> eventsOuts = new ArrayList<EventOut>();
     events.forEach(e -> eventsOuts.add(new EventOut(e)));
-    //eventsOuts.forEach(e -> e.setDate((e.getDate().split(" ")[0])));
     return eventsOuts;
   }
 
@@ -135,9 +125,6 @@ public class EventServiceImpl implements EventService {
     List<Event> events = _eventRepository.findByLocationId(id);
     List<EventOut> eventsOuts = new ArrayList<EventOut>();
     events.forEach(e -> eventsOuts.add(new EventOut(e)));
-    System.out.println("test 1");
-    eventsOuts.forEach(e -> System.out.println(e.getName()));
-    System.out.println("test 2");
     return eventsOuts;
   }
 
@@ -146,7 +133,6 @@ public class EventServiceImpl implements EventService {
     List<Event> events = _eventRepository.findByCategoryId(id);
     List<EventOut> eventsOuts = new ArrayList<EventOut>();
     events.forEach(e -> eventsOuts.add(new EventOut(e)));
-    //eventsOuts.forEach(e -> e.setDate((e.getDate().split(" ")[0])));
     return eventsOuts;
   }
 

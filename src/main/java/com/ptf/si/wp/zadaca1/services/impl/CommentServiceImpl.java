@@ -35,7 +35,6 @@ public class CommentServiceImpl implements CommentService  {
     List<Comment> comments = _commentRepository.findAllByEventId(id);
     List<CommentOut> commentsOuts = new ArrayList<CommentOut>();
     comments.forEach(c -> commentsOuts.add(new CommentOut(c)));
-    //commentsOuts.forEach(e -> e.setDate((e.getDate().split(" ")[0])));
     return commentsOuts;
   }
 
@@ -51,7 +50,6 @@ public class CommentServiceImpl implements CommentService  {
       SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
       String stringDate = sdf2.format(new Date());
       c.setDate(stringDate);
-      System.out.println(c.getDate());
       c.setHidden(false);
       _commentRepository.save(c);
     } catch (Exception e) {

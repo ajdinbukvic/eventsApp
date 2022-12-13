@@ -28,15 +28,15 @@ public class UserController {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
-  @PostMapping(value = "/updatePassword/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String updatePassword(@Valid @ModelAttribute("userUpdateIn") UserUpdateIn userUpdateIn,
+  @PostMapping(value = "/changepassword/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+  public String changePassword(@Valid @ModelAttribute("userUpdateIn") UserUpdateIn userUpdateIn,
       @PathVariable("id") Long id,
       BindingResult result, Model model) {
 
     User u = _userService.getUserById(id);
     UserOut userOut = new UserOut(u);
     boolean isPasswordEqual = passwordEncoder.matches(userUpdateIn.getCurrentPassword(), u.getPassword());
-    // System.out.println(isPasswordEqual);
+  
     if (!isPasswordEqual) {
       result.rejectValue("currentPassword", null, "Unesena trenutna lozinka nije ispravna!");
     }
@@ -47,20 +47,20 @@ public class UserController {
       model.addAttribute("userUpdateIn", userUpdateIn);
       model.addAttribute("userOut", userOut);
       return "profile";
-      // return "redirect:home";
     }
-    _userService.updatePassword(u.getId(), userUpdateIn);
+
+    _userService.changePassword(u.getId(), userUpdateIn);
     model.addAttribute("success", "Uspješno ste promijenili lozinku svog profila.");
     model.addAttribute("userUpdateIn", userUpdateIn);
     model.addAttribute("userOut", userOut);
     model.addAttribute("userId", u.getId());
     return "profile";
-    // return "redirect:home";
+    
   }
 
-  @PostMapping(value = "/update/{id}")
-  public String updateUserStatus(@PathVariable Long id, Model model) {
-    boolean status = _userService.updateUserStatus(id);
+  @PostMapping(value = "/changestatus/{id}")
+  public String changeStatus(@PathVariable Long id, Model model) {
+    boolean status = _userService.changeStatus(id);
     String message = status == false ? "banovali" : "unbanovali";
     model.addAttribute("success", "Uspješno ste " + message + " korisnika (ID: " + id +")");
     model.addAttribute("users", _userService.getAllUsers());

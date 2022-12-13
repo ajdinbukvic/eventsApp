@@ -15,4 +15,5 @@ public interface CommentService {
   public void postNewComment(CommentIn commentIn);
 
   public void removeComment(Long id);
+  
 }

@@ -119,9 +119,6 @@ public class User {
   }
 
   public User(UserUpdateIn userUpdateIn) {
-    // firstName = userUpdateIn.getFirstName();
-    // lastName = userUpdateIn.getLastName();
-    // email = userUpdateIn.getEmail();
     password = userUpdateIn.getPassword();
   }
 

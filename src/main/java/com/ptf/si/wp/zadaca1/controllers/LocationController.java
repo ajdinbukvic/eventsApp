@@ -1,30 +1,22 @@
 package com.ptf.si.wp.zadaca1.controllers;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.ptf.si.wp.zadaca1.models.in.LocationIn;
-import com.ptf.si.wp.zadaca1.models.out.LocationOut;
 import com.ptf.si.wp.zadaca1.services.LocationService;
 
 @Controller
-@RequestMapping("/api/locations")
+@RequestMapping("/locations")
 public class LocationController {
 
   @Autowired
   private LocationService _locationService;
-
-  @GetMapping(value = "/")
-  public List<LocationOut> getAllLocations() {
-    return _locationService.getAllLocations();
-  }
 
   @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public String addNewLocation(@ModelAttribute("locationIn") LocationIn locationIn, Model model) {

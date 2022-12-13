@@ -1,18 +1,11 @@
 package com.ptf.si.wp.zadaca1.models.in;
 
-//import java.sql.Date;
-//import java.sql.Date;
-//import java.time.LocalDate;
-
-//import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-//import org.springframework.format.annotation.DateTimeFormat;
 
 public class EventIn {
 
@@ -108,12 +101,6 @@ public class EventIn {
 
   public void setCategoryId(Long categoryId) {
     this.categoryId = categoryId;
-  }
-
-  @Override
-  public String toString() {
-    return "EventIn [id=" + id + ", name=" + name + ", image=" + image + ", description=" + description + ", date="
-        + date + ", locationId=" + locationId + ", categoryId=" + categoryId + "]";
   }
 
 }

@@ -2,6 +2,7 @@ package com.ptf.si.wp.zadaca1.controllers;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,28 +18,23 @@ import com.ptf.si.wp.zadaca1.services.UserService;
 @Controller
 public class AuthController {
 
-  // @Autowired(required = false)
-  private final UserService _userService;
-
-  public AuthController(UserService _userService) {
-    super();
-    this._userService = _userService;
-  }
+  @Autowired
+  private UserService _userService;
 
   @GetMapping("/login")
   public String loginPage() {
     return "login";
   }
 
-  @GetMapping(value = "/register")
+  @GetMapping("/register")
   public String registerPage(Model model) {
     UserIn userIn = new UserIn();
-    model.addAttribute("user", userIn);
+    model.addAttribute("userIn", userIn);
     return "register";
   }
 
   @PostMapping(value = "/register", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String createProfile(@Valid @ModelAttribute("user") UserIn userIn, BindingResult result, Model model,
+  public String createProfile(@Valid @ModelAttribute("userIn") UserIn userIn, BindingResult result, Model model,
       RedirectAttributes ra) {
 
     boolean userEmailExists = _userService.userExist(userIn.getEmail());
@@ -49,7 +45,7 @@ public class AuthController {
       result.rejectValue("passwordConfirm", null, "Unesena lozinka i potvrda lozinke se ne poklapaju!");
     }
     if (result.hasErrors()) {
-      model.addAttribute("user", userIn);
+      model.addAttribute("userIn", userIn);
       return "register";
     }
     _userService.createProfile(userIn);

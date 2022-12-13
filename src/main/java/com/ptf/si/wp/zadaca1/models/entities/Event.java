@@ -1,8 +1,6 @@
 package com.ptf.si.wp.zadaca1.models.entities;
 
-//import java.sql.Date;
-//import java.time.LocalDate;
-//import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -10,8 +8,6 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-
-//import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ptf.si.wp.zadaca1.models.in.EventIn;
 

@@ -15,4 +15,5 @@ public interface CategoryService {
   public void addNewCategory(CategoryIn categoryIn);
 
   public void updateCategory(CategoryIn categoryIn);
+  
 }

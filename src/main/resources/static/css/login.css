@@ -4,7 +4,6 @@ body {
 }
 
 body.my-login-page {
-  /* background-color: #f7f9fb; */
   background: linear-gradient(to right, #21a9af, #172a74);
   font-size: 14px;
 }

@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.ptf.si.wp.zadaca1.models.SecurityUser;
 import com.ptf.si.wp.zadaca1.models.entities.Role;
 import com.ptf.si.wp.zadaca1.models.entities.User;
 import com.ptf.si.wp.zadaca1.models.in.UserIn;
@@ -16,22 +16,20 @@ import com.ptf.si.wp.zadaca1.models.in.UserUpdateIn;
 import com.ptf.si.wp.zadaca1.models.out.UserOut;
 import com.ptf.si.wp.zadaca1.repositories.RoleRepository;
 import com.ptf.si.wp.zadaca1.repositories.UserRepository;
+import com.ptf.si.wp.zadaca1.security.SecurityUser;
 import com.ptf.si.wp.zadaca1.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-  private final UserRepository _userRepository;
-  private final RoleRepository _roleRepository;
-  private final PasswordEncoder passwordEncoder;
+  @Autowired
+  private UserRepository _userRepository;
 
-  public UserServiceImpl(UserRepository _userRepository, PasswordEncoder passwordEncoder,
-      RoleRepository _roleRepository) {
-    super();
-    this._userRepository = _userRepository;
-    this.passwordEncoder = passwordEncoder;
-    this._roleRepository = _roleRepository;
-  }
+  @Autowired
+  private RoleRepository _roleRepository;
+
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   @Override
   public boolean userExist(String email) {
@@ -60,45 +58,28 @@ public class UserServiceImpl implements UserService {
     List<User> users = _userRepository.findAll();
     List<UserOut> usersOuts = new ArrayList<UserOut>();
     users.forEach(u -> {
-      System.out.println(u.getRoles());
       if(u.getRoles().size() == 1) usersOuts.add(new UserOut(u));
     });
     return usersOuts;
   }
 
   @Override
-  public void updatePassword(Long id, UserUpdateIn userUpdateIn) {
+  public void changePassword(Long id, UserUpdateIn userUpdateIn) {
     User u = _userRepository.findById(id).get();
     try {
       if (u != null) {
-        User updatedUser = new User(userUpdateIn);
-        updatedUser.setId(id);
-        updatedUser.setPassword(passwordEncoder.encode(userUpdateIn.getPassword()));
-        updatedUser.setBanned(u.isBanned());
-        updatedUser.setEmail(u.getEmail());
-        updatedUser.setFirstName(u.getFirstName());
-        updatedUser.setLastName(u.getLastName());
-        updatedUser.setRoles(u.getRoles());
-        _userRepository.save(updatedUser);
-      } else
-        throw new IllegalArgumentException("Korisnik s tim ID-om ne postoji!");
+        u.setPassword(passwordEncoder.encode(userUpdateIn.getPassword()));
+        _userRepository.save(u);
+      } 
+      else throw new IllegalArgumentException("Korisnik s tim ID-om ne postoji!");
     } catch (Exception e) {
 
     }
-    // return null;
-
   }
 
   @Override
   public User getUserByEmail(String email) {
     User user = _userRepository.findByEmail(email).get();
-    // UserOut user = new UserOut();
-    // user.setBanned(u.get().isBanned());
-    // user.setEmail(u.get().getEmail());
-    // user.setFirstName(u.get().getFirstName());
-    // user.setLastName(u.get().getLastName());
-    // user.setId(u.get().getId());
-    // user.setRoles(u.get().getRoles());
     return user;
   }
 
@@ -109,10 +90,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public boolean updateUserStatus(Long id) {
-    User u = null;
+  public boolean changeStatus(Long id) {
+    User u = _userRepository.findById(id).get();
     try {
-      u = _userRepository.findById(id).get();
       if (u != null) {
         u.setBanned(!u.isBanned());
         _userRepository.save(u);
@@ -121,8 +101,8 @@ public class UserServiceImpl implements UserService {
     } catch (Exception ex) {
 
     }
-    return !u.isBanned();
-    
+
+    return !u.isBanned(); 
   }
 
 }
