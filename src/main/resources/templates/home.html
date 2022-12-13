@@ -31,40 +31,77 @@
     <div
       class="container my-4 d-flex justify-content-center align-items-center"
     >
-      <form class="form-inline mr-5" target="_self">
+      <form class="form-inline mr-5" target="_self" th:action="@{/home}">
         <div class="form-group">
           <label for="search-field"><i class="fa fa-search"></i></label
           ><input
             class="form-control search-field ml-2"
             type="search"
-            name="search"
-            id="search-field"
+            name="naziv"
+            id="naziv"
+            th:value="${param.naziv}"
+            required
             placeholder="Pretraga po nazivu..."
           />
         </div>
+        <button type="submit" class="btn btn-primary">Traži</button>
       </form>
       <div class="mr-5">
         <span class="mr-3">Pretraga po lokaciji:</span>
-        <select class="form-select" aria-label="Default select example">
-          <option value="all" selected>sve</option>
-          <option
-            th:each="location : ${locations}"
-            th:value="${location.id}"
-            th:text="${location.name}"
-          ></option>
-        </select>
+        <form th:action="@{/home}" style="display: inline">
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            name="lokacija"
+            onchange="this.form.submit()"
+          >
+            <option
+              value=""
+              th:selected="${param.lokacija == null} ? 'true' : 'false'"
+            >
+              sve
+            </option>
+            <option
+              th:each="location : ${locations}"
+              th:value="${location.id}"
+              th:text="${location.name}"
+              th:selected="${#strings.equals(param.lokacija, #strings.toString(location.id))}"
+            ></option>
+          </select>
+        </form>
       </div>
       <div class="">
         <span class="mr-3">Pretraga po kategoriji:</span>
-        <select class="form-select" aria-label="Default select example">
-          <option value="all" selected>sve</option>
-          <option
-            th:each="category : ${categories}"
-            th:value="${category.id}"
-            th:text="${category.name}"
-          ></option>
-        </select>
+        <form th:action="@{/home}" style="display: inline">
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            name="kategorija"
+            onchange="this.form.submit()"
+          >
+            <option
+              value=""
+              th:selected="${param.lokacija == null} ? 'true' : 'false'"
+            >
+              sve
+            </option>
+            <option
+              th:each="category : ${categories}"
+              th:value="${category.id}"
+              th:text="${category.name}"
+              th:selected="${#strings.equals(param.kategorija, #strings.toString(category.id))}"
+            ></option>
+          </select>
+        </form>
       </div>
+    </div>
+    <div th:if="${events.size == 0}">
+      <article
+        class="postcard light blue text-primary justify-content-center align-items-center"
+        style="height: 250px; font-size: 40px; margin-bottom: 150px"
+      >
+        Trenutno nema događaja za prikazati!
+      </article>
     </div>
     <!-- CARDS -->
     <section class="light">

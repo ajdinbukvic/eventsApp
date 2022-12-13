@@ -14,7 +14,13 @@ public interface EventRepository extends JpaRepository<Event, Long> {
   @Query(value = "SELECT * FROM events e WHERE e.finished = 0 AND DATE_FORMAT(STR_TO_DATE(e.date,'%d/%m/%Y'), '%Y-%m-%d') >= CURDATE()", nativeQuery = true)
   public List<Event> findAllActiveEvents();
 
-  // @Modifying
-  // @Query("UPDATE Event e SET e.finished = 1 WHERE e.id = ?1")
-  // public int changeFinishedStatus(Long id);
+  @Query(value = "SELECT * FROM events e WHERE e.finished = 0 AND DATE_FORMAT(STR_TO_DATE(e.date,'%d/%m/%Y'), '%Y-%m-%d') >= CURDATE() AND e.name LIKE %?1%", nativeQuery = true)
+  public List<Event> findByNameContainingIgnoreCase(String name);
+
+  @Query(value = "SELECT * FROM events e WHERE e.finished = 0 AND DATE_FORMAT(STR_TO_DATE(e.date,'%d/%m/%Y'), '%Y-%m-%d') >= CURDATE() AND e.location_id = ?1", nativeQuery = true)
+  public List<Event> findByLocationId(Long id);
+
+  @Query(value = "SELECT * FROM events e WHERE e.finished = 0 AND DATE_FORMAT(STR_TO_DATE(e.date,'%d/%m/%Y'), '%Y-%m-%d') >= CURDATE() AND e.category_id = ?1", nativeQuery = true)
+  public List<Event> findByCategoryId(Long id);
+  
 }

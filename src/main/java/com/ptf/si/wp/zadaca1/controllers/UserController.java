@@ -1,7 +1,5 @@
 package com.ptf.si.wp.zadaca1.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,16 +28,6 @@ public class UserController {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
-  @GetMapping(value = "/")
-  public List<UserOut> getAllUsers() {
-    return _userService.getAllUsers();
-  }
-
-  // @PutMapping(value = "/updatePassword/{id}")
-  // public UserOut updatePassword(@PathVariable("id") Long id, @RequestBody
-  // userUpdateIn userUpdateIn) {
-  // return _userService.updatePassword(id, userUpdateIn);
-  // }
   @PostMapping(value = "/updatePassword/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public String updatePassword(@Valid @ModelAttribute("userUpdateIn") UserUpdateIn userUpdateIn,
       @PathVariable("id") Long id,
@@ -54,7 +41,7 @@ public class UserController {
       result.rejectValue("currentPassword", null, "Unesena trenutna lozinka nije ispravna!");
     }
     if (!userUpdateIn.passwordEquals(userUpdateIn.getPassword(), userUpdateIn.getPasswordConfirm())) {
-      result.rejectValue("passwordConfirm", null, "Unesena lozinka i potvrda lozinke se ne poklapaju!");
+      result.rejectValue("passwordConfirm", null, "Unesena nova lozinka i potvrda lozinke se ne poklapaju!");
     }
     if (result.hasErrors()) {
       model.addAttribute("userUpdateIn", userUpdateIn);
@@ -66,6 +53,7 @@ public class UserController {
     model.addAttribute("success", "Uspješno ste promijenili lozinku svog profila.");
     model.addAttribute("userUpdateIn", userUpdateIn);
     model.addAttribute("userOut", userOut);
+    model.addAttribute("userId", u.getId());
     return "profile";
     // return "redirect:home";
   }

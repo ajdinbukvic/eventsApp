@@ -121,4 +121,33 @@ public class EventServiceImpl implements EventService {
     
   }
 
+  @Override
+  public List<EventOut> getAllEventsByName(String name) {
+    List<Event> events = _eventRepository.findByNameContainingIgnoreCase(name);
+    List<EventOut> eventsOuts = new ArrayList<EventOut>();
+    events.forEach(e -> eventsOuts.add(new EventOut(e)));
+    //eventsOuts.forEach(e -> e.setDate((e.getDate().split(" ")[0])));
+    return eventsOuts;
+  }
+
+  @Override
+  public List<EventOut> getAllEventsByLocationId(Long id) {
+    List<Event> events = _eventRepository.findByLocationId(id);
+    List<EventOut> eventsOuts = new ArrayList<EventOut>();
+    events.forEach(e -> eventsOuts.add(new EventOut(e)));
+    System.out.println("test 1");
+    eventsOuts.forEach(e -> System.out.println(e.getName()));
+    System.out.println("test 2");
+    return eventsOuts;
+  }
+
+  @Override
+  public List<EventOut> getAllEventsByCategoryId(Long id) {
+    List<Event> events = _eventRepository.findByCategoryId(id);
+    List<EventOut> eventsOuts = new ArrayList<EventOut>();
+    events.forEach(e -> eventsOuts.add(new EventOut(e)));
+    //eventsOuts.forEach(e -> e.setDate((e.getDate().split(" ")[0])));
+    return eventsOuts;
+  }
+
 }

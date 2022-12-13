@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,13 +45,20 @@ public class ViewController {
   private CommentService _commentService;
 
   @GetMapping(value = "/home")
-  public String homePage(Model model, @AuthenticationPrincipal SecurityUser user) {
+  public String homePage(Model model, @AuthenticationPrincipal SecurityUser user, @Param("naziv") String naziv, @Param("lokacija") Long lokacija, @Param("kategorija") Long kategorija) {
     if (user != null) {
       model.addAttribute("user", user);
       User u = _userService.getUserByEmail(user.getUsername());
-      model.addAttribute("id", u.getId());
+      model.addAttribute("userId", u.getId());
     }
-    model.addAttribute("events", _eventService.getAllActiveEvents());
+    if (naziv != null) model.addAttribute("events", _eventService.getAllEventsByName(naziv));
+    
+    else if (lokacija != null) model.addAttribute("events", _eventService.getAllEventsByLocationId(lokacija));
+
+    else if (kategorija != null) model.addAttribute("events", _eventService.getAllEventsByCategoryId(kategorija));
+
+    else model.addAttribute("events", _eventService.getAllActiveEvents());
+
     model.addAttribute("locations", _locationService.getAllLocations());
     model.addAttribute("categories", _categoryService.getAllCategories());
     return "home";
@@ -63,6 +71,7 @@ public class ViewController {
     User u = _userService.getUserByEmail(user.getUsername());
     UserOut userOut = new UserOut(u);
     model.addAttribute("userOut", userOut);
+    model.addAttribute("userId", u.getId());
     return "profile";
   }
 
@@ -85,7 +94,7 @@ public class ViewController {
     if (user != null) {
       model.addAttribute("user", user);
       User u = _userService.getUserByEmail(user.getUsername());
-      model.addAttribute("id", u.getId());
+      model.addAttribute("userId", u.getId());
       LocationIn locationIn = new LocationIn();
       model.addAttribute("locationIn", locationIn);
       model.addAttribute("locations", _locationService.getAllLocations());
@@ -98,7 +107,7 @@ public class ViewController {
     if (user != null) {
       model.addAttribute("user", user);
       User u = _userService.getUserByEmail(user.getUsername());
-      model.addAttribute("id", u.getId());
+      model.addAttribute("userId", u.getId());
       CategoryIn categoryIn = new CategoryIn();
       model.addAttribute("categoryIn", categoryIn);
       model.addAttribute("categories", _categoryService.getAllCategories());
@@ -111,7 +120,7 @@ public class ViewController {
     if (user != null) {
       model.addAttribute("user", user);
       User u = _userService.getUserByEmail(user.getUsername());
-      model.addAttribute("id", u.getId());
+      model.addAttribute("userId", u.getId());
       model.addAttribute("users", _userService.getAllUsers());
     }
     return "user-manage";
@@ -122,7 +131,7 @@ public class ViewController {
     if (user != null) {
       model.addAttribute("user", user);
       User u = _userService.getUserByEmail(user.getUsername());
-      model.addAttribute("id", u.getId());
+      model.addAttribute("userId", u.getId());
       EventIn eventIn = new EventIn();
       model.addAttribute("eventIn", eventIn);
       model.addAttribute("events", _eventService.getAllEvents());
