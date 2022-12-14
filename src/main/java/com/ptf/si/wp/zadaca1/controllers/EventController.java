@@ -4,6 +4,8 @@ package com.ptf.si.wp.zadaca1.controllers;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -32,7 +34,7 @@ public class EventController {
   private CategoryService _categoryService;
 
   @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String addNewEvent(@ModelAttribute("eventIn") EventIn eventIn, Model model) {
+  public String addNewEvent(@Valid @ModelAttribute("eventIn") EventIn eventIn, Model model) {
     _eventService.addNewEvent(eventIn);
     model.addAttribute("success", "Uspješno ste dodali novi događaj!");
     model.addAttribute("events", _eventService.getAllEvents());
@@ -52,7 +54,7 @@ public class EventController {
   }
 
   @PostMapping(value = "/update", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String updateEvent(@ModelAttribute("eventIn") EventIn eventIn, Model model) {
+  public String updateEvent(@Valid @ModelAttribute("eventIn") EventIn eventIn, Model model) {
     _eventService.updateEvent(eventIn);
     model.addAttribute("success", "Uspješno ste uredili događaj (ID: " + eventIn.getId() + ")");
     model.addAttribute("events", _eventService.getAllEvents());

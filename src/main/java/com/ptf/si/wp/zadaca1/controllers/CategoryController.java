@@ -1,6 +1,8 @@
 package com.ptf.si.wp.zadaca1.controllers;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,7 @@ public class CategoryController {
   private CategoryService _categoryService;
 
   @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String addNewCategory(@ModelAttribute("categoryIn") CategoryIn categoryIn, Model model) {
+  public String addNewCategory(@Valid @ModelAttribute("categoryIn") CategoryIn categoryIn, Model model) {
     _categoryService.addNewCategory(categoryIn);
     model.addAttribute("success", "Uspješno ste dodali novu kategoriju!");
     model.addAttribute("categories", _categoryService.getAllCategories());
@@ -28,7 +30,7 @@ public class CategoryController {
   }
 
   @PostMapping(value = "/update", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String updateCategory(@ModelAttribute("categoryIn") CategoryIn categoryIn, Model model) {
+  public String updateCategory(@Valid @ModelAttribute("categoryIn") CategoryIn categoryIn, Model model) {
     _categoryService.updateCategory(categoryIn);
     model.addAttribute("success", "Uspješno ste uredili kategoriju (ID: " + categoryIn.getId() + ")");
     model.addAttribute("categories", _categoryService.getAllCategories());
